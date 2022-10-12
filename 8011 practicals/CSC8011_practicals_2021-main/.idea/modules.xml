@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/CSC8011_practicals_2021-main.iml" filepath="$PROJECT_DIR$/.idea/CSC8011_practicals_2021-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easy/easy.iml" filepath="$PROJECT_DIR$/easy/easy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intermediate/practical-1/practical-1.iml" filepath="$PROJECT_DIR$/intermediate/practical-1/practical-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intermediate/practical-2/practical-2.iml" filepath="$PROJECT_DIR$/intermediate/practical-2/practical-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intermediate/practical-3/practical-3.iml" filepath="$PROJECT_DIR$/intermediate/practical-3/practical-3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easy/practical-3/practical-31.iml" filepath="$PROJECT_DIR$/easy/practical-3/practical-31.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intermediate/practical-4/practical-4.iml" filepath="$PROJECT_DIR$/intermediate/practical-4/practical-4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easy/practical-4/practical-41.iml" filepath="$PROJECT_DIR$/easy/practical-4/practical-41.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intermediate/practical-5/practical-5.iml" filepath="$PROJECT_DIR$/intermediate/practical-5/practical-5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easy/practical-5/practical-51.iml" filepath="$PROJECT_DIR$/easy/practical-5/practical-51.iml" />
+    </modules>
+  </component>
+</project>
