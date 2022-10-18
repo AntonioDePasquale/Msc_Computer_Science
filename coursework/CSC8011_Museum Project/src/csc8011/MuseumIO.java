@@ -51,7 +51,7 @@ public class MuseumIO {
                 "\n2: A list of all current exhibits and their information" +
                 "\n3: Details of exhibit with the highest value" +
                 "\n4: Details of the first exhibit acquired" +
-                "\n5: The average value of all exhibits");
+                "\n5: The average value of all exhibits\n");
 
         switch (scan.nextInt()) {
             case 1:
