@@ -35,32 +35,41 @@ public class Museum {
 
     //function to the find the highest value of all objects in the arraylist, then returns that object//
 
-    public Object findHighestValue() {
+    public String objectToString(int index) {
+        String objectString =  (exhibits.get(index).getExhibitId())
+                + ", " + (exhibits.get(index).getDescription())
+                + ", " + (exhibits.get(index).getYearAcquired())
+                + ", " + (exhibits.get(index).getValue());
+        return objectString;
+    }
+    public String findHighestValue() {
         Integer length = exhibits.size();
-        Exhibit highestValExhibit = new Exhibit(0,"default",0,0.00);
         double max = 0.0;
+        String exhibitString = "";
 
         for (int i = 0; i < length; i++) {
             if (exhibits.get(i).getValue() > max) {
-                highestValExhibit = exhibits.get(i);
+                max = exhibits.get(i).getValue();
+                exhibitString = objectToString(i);
             }
         }
-        return highestValExhibit;
+        return exhibitString;
     }
 
     //function to find object representing the first item acquired//
 
-    public Object findFirstAdded() {
+    public String findFirstAdded() {
         Integer length = exhibits.size();
-        Exhibit firstExhibit = new Exhibit(0,"default",0,0.00);
         Integer year = 9999;
+        String firstString = "";
 
         for (int i = 0; i < length; i++) {
             if (exhibits.get(i).getYearAcquired() < year) {
-                firstExhibit = exhibits.get(i);
+                year = exhibits.get(i).getYearAcquired();
+                firstString = objectToString(i);
             }
         }
-        return firstExhibit;
+        return firstString;
     }
 
     //function to find the average of all exhibit values//

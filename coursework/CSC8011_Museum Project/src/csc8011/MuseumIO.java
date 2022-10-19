@@ -13,14 +13,13 @@ public class MuseumIO {
     public static void start(Museum museum, Scanner scan) throws FileNotFoundException {
         while (true) {
             museumOptionMenu(museum, scan);
-            String input = scan.nextLine();
             read(museum);
         }
     }
 
     public static void read(Museum museum) throws FileNotFoundException {
         try {
-            Scanner reader = new Scanner(new File("csc8011/exhibits.csv"));
+            Scanner reader = new Scanner(new File("C:\\Users\\Laptop\\Documents\\Msc Computer Science\\coursework\\CSC8011_Museum Project\\src\\csc8011\\exhibits.csv"));
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 if (line.isEmpty()) {
@@ -46,7 +45,8 @@ public class MuseumIO {
 
     public static void museumOptionMenu(Museum museum, Scanner scan) {
         System.out.println("Welcome to Museum online portal!");
-        System.out.println("Please enter the number for the corresponding option you wish to see");
+
+        System.out.println("Please enter the number for the corresponding option you wish to see\n");
         System.out.println("1: The name of the Museum" +
                 "\n2: A list of all current exhibits and their information" +
                 "\n3: Details of exhibit with the highest value" +
@@ -57,7 +57,7 @@ public class MuseumIO {
             case 1:
                 System.out.println(museum.getMuseumName());
                 System.out.println("Do you wish to change the name?" +
-                        "\n(enter yes to confirm or any other input to return to the menu)");
+                        "\n(enter yes to confirm or any other input to return to the menu)\n");
 
                 if (scan.nextLine().equalsIgnoreCase("yes")) {
                     System.out.println("Please enter the new museum name");
@@ -70,24 +70,26 @@ public class MuseumIO {
 
             case 2:
                 for (int i = 0; i < museum.exhibits.size(); i++) {
-                    System.out.println(museum.exhibits.get(i));
+                    System.out.print(museum.exhibits.get(i).getExhibitId() + ", ");
+                    System.out.print(museum.exhibits.get(i).getDescription() + ", ");
+                    System.out.print(museum.exhibits.get(i).getYearAcquired() + ", ");
+                    System.out.print(museum.exhibits.get(i).getValue() + "\n\n");
                 }
                 break;
 
             case 3:
                 System.out.println("The highest value exhibit is shown below");
-                System.out.println(museum.findHighestValue());
+                System.out.println(museum.findHighestValue() + "\n");
                 break;
 
             case 4:
                 System.out.println("The first acquired exhibit is shown below");
-                System.out.println(museum.findFirstAdded());
+                System.out.println(museum.findFirstAdded() + "\n");
                 break;
 
             case 5:
-                System.out.println("The average value of all exhibits is " + museum.findAverageValue());
+                System.out.println("The average value of all exhibits is " + museum.findAverageValue() + "\n");
                 break;
         }
     }
-
 }
