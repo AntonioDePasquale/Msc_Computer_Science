@@ -45,10 +45,10 @@ public class Museum {
     //then returns each object as a string of its concatenated attributes//
 
     public String objectToString(int index) {
-        String objectString =  (exhibits.get(index).getExhibitId())
-                + ", " + (exhibits.get(index).getDescription())
-                + ", " + (exhibits.get(index).getYearAcquired())
-                + ", " + (exhibits.get(index).getValue());
+        String objectString =  "ID: " + (exhibits.get(index).getExhibitId())
+                + ", " + "Description: " + (exhibits.get(index).getDescription())
+                + ", " + "Year acquired: " + (exhibits.get(index).getYearAcquired())
+                + ", " + "Value: " + (exhibits.get(index).getValue());
         return objectString;
     }
 

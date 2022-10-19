@@ -68,10 +68,10 @@ public class MuseumIO {
                 System.out.println(museum.getMuseumName());
                 int length = museum.getArrayList().size();
                 for (int i = 0; i < length; i++) {                  //iterates over each exhibit object attribute//
-                    System.out.print(museum.getArrayList().get(i).getExhibitId() + ", ");
-                    System.out.print(museum.getArrayList().get(i).getDescription() + ", ");
-                    System.out.print(museum.getArrayList().get(i).getYearAcquired() + ", ");
-                    System.out.print(museum.getArrayList().get(i).getValue() + "\n");
+                    System.out.print("ID: " + museum.getArrayList().get(i).getExhibitId() + ", ");
+                    System.out.print("Description: " + museum.getArrayList().get(i).getDescription() + ", ");
+                    System.out.print("Year acquired: " + museum.getArrayList().get(i).getYearAcquired() + ", ");
+                    System.out.print("Value: " + museum.getArrayList().get(i).getValue() + "\n");
                     //each attribute printed to console on a new line separated by comma//
                 }
             }
