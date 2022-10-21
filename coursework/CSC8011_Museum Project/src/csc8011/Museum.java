@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 //Museum class holding the arraylist of exhibits//
 public class Museum {
-    ArrayList<Exhibit> exhibits = new ArrayList<>();              //arraylist of Exhibit objects//
+    private ArrayList<Exhibit> exhibits = new ArrayList<>();              //arraylist of Exhibit objects//
     private String name;
 
     public Museum() {

@@ -13,7 +13,13 @@ public class MuseumIO {
 
     public static void start(Museum museum, Scanner scan) {         //start function described above//
         read(museum);                                               //reader function called read, uses museum as param//
-        while (museumOptionMenu(museum, scan)) {   //while loop to launch the program, returns true until exit is selected//
+
+        System.out.println("\nWelcome to the the street fighter museum portal!" +
+                "\nPlease enter a new museum name");                //welcoming message that asks input for new museum name//
+        String input = scan.next();
+        museum.setMuseumName(input);
+
+        while (museumOptionMenu(museum, scan)) {                    //while loop to launch the program, returns true until exit is selected//
             museumOptionMenu(museum, scan);                         //will run the menu switch function on repeat//
         }
     }
@@ -22,12 +28,12 @@ public class MuseumIO {
     public static void read(Museum museum) {
         try {
             Scanner reader = new Scanner(new File("src/csc8011/exhibits.csv"));  //reads csv file location//
-            while (reader.hasNextLine()) {                      //while there is a nextline assign it to line//
+            while (reader.hasNextLine()) {                                      //while there is a nextline assign it to line//
                 String line = reader.nextLine();
-                if (line.isEmpty()) {                           //if the line is empty continue out of while loop//
+                if (line.isEmpty()) {                                           //if the line is empty continue out of while loop//
                 continue;
                 }
-                String[] attributes = line.split(",");     //splits each line into an array of attributes//
+                String[] attributes = line.split(",");                    //splits each line into an array of attributes//
 
                 Integer tempId = Integer.parseInt(attributes[0].trim());        //parses index[0] to int, assigns own variable//
                 String tempDesc = attributes[1].trim();                         //index[1] is already string, assigns own variable//
@@ -47,58 +53,77 @@ public class MuseumIO {
     //museum option menu function using a switch expression//
 
     public static boolean museumOptionMenu(Museum museum, Scanner scan) {
-        System.out.println("\nWelcome to the " + museum.getMuseumName() + "!");  //welcoming message that prints museum name//
-        System.out.println("Please enter the number for the corresponding option you wish to see\n");
-        System.out.println("""
-                1: Change the name of the Museum
-                2: A list of all current exhibits and their information
-                3: Details of exhibit with the highest value
-                4: Details of the first exhibit acquired
-                5: The average value of all exhibits
-                6: Exit the Program
-                """);                                               //enhanced switch expressions with 6 options//
 
-        if (!scan.hasNextInt()) {
-            System.out.println("Please select a valid number");
-            scan.nextLine();
-        } else {
-            switch (scan.nextInt()) {
-                case 1 -> {
-                    System.out.println(museum.getMuseumName());         //case 1 prints museum name and asks for input//
-                    System.out.println("Enter a new museum name");
-                    String nameInput = scan.next();                     //the museum name is set to the input using a setter function//
-                    museum.setMuseumName(nameInput);
-                }
-                case 2 -> {                                             //case 2 prints all objects in the arraylist as a string//
-                    System.out.println(museum.getMuseumName());
-                    int length = museum.getArrayList().size();
-                    for (int i = 0; i < length; i++) {                  //iterates over each exhibit object attribute//
-                        System.out.print("ID: " + museum.getArrayList().get(i).getExhibitId() + ", ");
-                        System.out.print("Description: " + museum.getArrayList().get(i).getDescription() + ", ");
-                        System.out.print("Year acquired: " + museum.getArrayList().get(i).getYearAcquired() + ", ");
-                        System.out.print("Value: " + museum.getArrayList().get(i).getValue() + "\n");
-                        //each attribute printed to console on a new line separated by comma//
+        //try and catch for the switch method with if else statement to check if the input is a valid number//
+
+        try {
+            System.out.println("\nWelcome to the the " + museum.getMuseumName() + "!");
+            System.out.println("Please enter the number for the corresponding option\n");
+            System.out.println("""
+                    1: Change the name of the Museum
+                    2: A list of all current exhibits and their information
+                    3: Details of exhibit with the highest value
+                    4: Details of the first exhibit acquired
+                    5: The average value of all exhibits
+                    6: Exit the Program
+                    """);
+
+            if (!scan.hasNextInt()) {
+                System.out.println("Please select a valid number");
+                scan.nextLine();
+
+            } else {
+                switch (scan.nextInt()) {
+
+                    //case 1 asks for an input set to a variable called nameInput and sets it as the museum name//
+                    case 1 -> {
+                        System.out.println(museum.getMuseumName());
+                        System.out.println("Enter a new museum name");
+                        String nameInput = scan.next();
+                        museum.setMuseumName(nameInput);
+                    }
+
+                    //case 2 prints all attributes of an object in the arraylist one by one separated by a comma and descriptor//
+                    case 2 -> {
+                        System.out.println(museum.getMuseumName());
+                        int length = museum.getArrayList().size();
+                        for (int i = 0; i < length; i++) {                  //iterates over each exhibit object attribute//
+                            System.out.print("ID: " + museum.getArrayList().get(i).getExhibitId() + ", ");
+                            System.out.print("Description: " + museum.getArrayList().get(i).getDescription() + ", ");
+                            System.out.print("Year acquired: " + museum.getArrayList().get(i).getYearAcquired() + ", ");
+                            System.out.print("Value: " + museum.getArrayList().get(i).getValue() + "\n");
+                        }
+                    }
+
+                    //case 3 highest value is printed from the findHighestValue function//
+                    case 3 -> {
+                        System.out.println("The highest value exhibit is shown below");
+                        System.out.println(museum.findHighestValue() + "\n");
+                    }
+
+                    //case 4 first acquired is printed from the findFirstAcquired function//
+                    case 4 -> {
+                        System.out.println("The first acquired exhibit is shown below");
+                        System.out.println(museum.findFirstAdded() + "\n");
+                    }
+
+                    //case 5 prints average value found by the findFirstAdded function//
+                    case 5 -> System.out.println("The average value of all exhibits is " + museum.findAverageValue() + "\n");
+
+                    //returns false which exits the while loop//
+                    case 6 -> {
+                        System.out.println("Exiting the program");
+                        return false;
+                    }
+
+                    default -> {
+                        break;
                     }
                 }
-                case 3 -> {                           //case 3 highest value is printed from the findHighestValue function//
-                    System.out.println("The highest value exhibit is shown below");
-                    System.out.println(museum.findHighestValue() + "\n");
-                }
-                case 4 -> {                           //case 4 first acquired is printed from the findFirstAcquired function//
-                    System.out.println("The first acquired exhibit is shown below");
-                    System.out.println(museum.findFirstAdded() + "\n");
-                }                                     //case 5 average value found by the findFirstAdded function//
-                case 5 -> System.out.println("The average value of all exhibits is " + museum.findAverageValue() + "\n");
-
-                case 6 -> {
-                    System.out.println("Exiting the program");         //returns false which exits the while loop//
-                    return false;
-                }
-
-                default -> {
-                    break;
-                }
             }
+            //exception that prints the error message//
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
         return true;
     }
