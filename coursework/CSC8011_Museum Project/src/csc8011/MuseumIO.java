@@ -27,18 +27,18 @@ public class MuseumIO {
     //reader function to read lines from the csv file as exhibit objects to be added to the arraylist//
     public static void read(Museum museum) {
         try {
-            Scanner reader = new Scanner(new File("src/csc8011/exhibits.csv"));  //reads csv file location//
-            while (reader.hasNextLine()) {                                      //while there is a nextline assign it to line//
+            Scanner reader = new Scanner(new File("csc8011/exhibits.csv"));  //reads csv file location//
+            while (reader.hasNextLine()) {                                            //while there is a nextline assign it to line//
                 String line = reader.nextLine();
-                if (line.isEmpty()) {                                           //if the line is empty continue out of while loop//
+                if (line.isEmpty()) {                                                 //if the line is empty continue out of while loop//
                 continue;
                 }
-                String[] attributes = line.split(",");                    //splits each line into an array of attributes//
+                String[] attributes = line.split(",");                           //splits each line into an array of attributes//
 
-                Integer tempId = Integer.parseInt(attributes[0].trim());        //parses index[0] to int, assigns own variable//
-                String tempDesc = attributes[1].trim();                         //index[1] is already string, assigns own variable//
-                Integer tempYear = Integer.parseInt(attributes[2].trim());      //parses index[2] to int, assigns own variable//
-                Double tempValue = Double.parseDouble(attributes[3].trim());    //parses index[3] to double, assigns own variable//
+                Integer tempId = Integer.parseInt(attributes[0].trim());               //parses index[0] to int, assigns own variable//
+                String tempDesc = attributes[1].trim();                                //index[1] is already string, assigns own variable//
+                Integer tempYear = Integer.parseInt(attributes[2].trim());             //parses index[2] to int, assigns own variable//
+                Double tempValue = Double.parseDouble(attributes[3].trim());           //parses index[3] to double, assigns own variable//
 
                 //individual attributes can now be passed into the Exhibit constructor to create an exhibit object//
                 Exhibit tempExhibit = new Exhibit(tempId,tempDesc,tempYear,tempValue);
