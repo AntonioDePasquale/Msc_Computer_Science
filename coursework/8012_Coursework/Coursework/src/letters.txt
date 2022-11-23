@@ -1,0 +1,2 @@
+filewriter append true
+close file when program ends or starts
