@@ -2,11 +2,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The MainProgram class that contains the main method.
+ */
 public class MainProgram {
 
+    /**
+     *Main method, contains all the functions needed to run the program.
+     *The contained methods are placed here to mostly run only once (start being the exception).
+     * The sorted arraylists for the customer class and the activity class are created here.
+     * The scanner scan that is used throughout the program is created here.
+     * The reader function which reads the input.txt file is here, so it is only read once.
+     * The start function is called to present the option menu.
+     */
     public static void main(String[] args) throws IOException {
-
-        /*completely unfinished*/
 
         Activity.letterFileWiper();
         Scanner scan = new Scanner(System.in);
@@ -16,7 +25,16 @@ public class MainProgram {
         start(activityArrayList, customerArrayList, scan);
     }
 
-    /*start*/
+    /**
+     * The start function runs a while loop with the return from the optionMenu as a condition.
+     * The optionMenu function is a boolean that returns true until the program is manually ended where
+     * it returns false ending the while loop. while optionMenu keep returning true it will run itself recursively
+     * to reload the menu after each switch statement is executed.
+     *
+     * @param activity the sorted array list of activities.
+     * @param customer the sorted array list of customers.
+     * @param scan the scanner to read user input.
+     */
     public static void start(SortedArrayList<Activity> activity, SortedArrayList<Customer> customer, Scanner scan) throws IOException {
 
         while (optionMenu(activity, customer,scan)){
@@ -24,7 +42,18 @@ public class MainProgram {
         }
     }
 
-    /*reader function*/
+    /**
+     * Function to read the data line by line from input.txt file while the line is not null and line length > 0.
+     * The first line is read and parsed as an int to a variable called activityNumber then multiplied by two to get the
+     * number of lines to be read for activity data. for loop iterates through the activities in pairs of two. The first line is saved as
+     * the activityName and the second line is saved as the ticketNumber. Both variables are parameters to create an Activity object using the constructor.
+     * The next line read is the number of customers. Using the number of customers a for loop iterates through the next lines splitting each line into a
+     * first and second name which are parameters used to create a Customer object with its constructor.
+     * Both the Activity and Customer objects are inserted into sorted ArrayLists using the Insert function outlined in the sortedArrayList class.
+     *
+     * @param activityArrayList The sorted array list of activities.
+     * @param customerArrayList the sorted array list of customers.
+     */
     public static void reader(SortedArrayList<Activity> activityArrayList, SortedArrayList<Customer> customerArrayList) {
 
         ArrayList<String> fileLineArray = new ArrayList<>();
@@ -54,8 +83,28 @@ public class MainProgram {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //number format exception//
     }
+
+    /**
+     * optionMenu function to display switch statement options to the console and taking user input to execute each option.
+     * f - returning false ends the start function and the optionMenu recursion is broken, ending the program.
+     * a - calls the activityPrint function outlined in the Activity class. This prints the activity information.
+     * c - calls the customerPrint function outlined in the Customer class. This prints the customer information.
+     * t - systematically asks the user for customer name and activity name information. The inputs are saved as variables
+     * and functions such as registered which checks to see if the name input is a valid customer. activityExists to check if
+     * the activity input is a valid activity. buyUpdate and activityBuyUpdate to check if enough tickets are available and if
+     * there are enough tickets to buy only then are the numbers updated accordingly. If a customer buys tickets for a new activity
+     * it is added to that customers activity list up to a maximum of 3 activities. Each customer activity has its own customer ticket number.
+     * r - Similar to the t statement code above which takes user input for the customer name, activity name and number of tickets to cancel.
+     * activityCancelUpdate and cancelUpdate are functions which check if the customer has tickets to cancel and only if there are
+     * enough tickets are the ticket numbers updated accordingly.
+     *
+     * @param activity the sorted ArrayList of activities.
+     * @param customer the sorted ArrayList of customers
+     * @param scan the scanner to read user input.
+     * @return optionMenu function returns true or false. true will cause the function to run again as outlined in the start function.
+     *         false will end the while loop in the start function ending the program.
+     */
     public static boolean optionMenu(SortedArrayList<Activity> activity, SortedArrayList<Customer> customer, Scanner scan) {
 
         System.out.println("""
