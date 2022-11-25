@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Customer implements Comparable<Customer> {
 
     /* Two Strings, one for the first name and one for the last name for the customer set to null by default */
@@ -188,6 +191,10 @@ public class Customer implements Comparable<Customer> {
         }
         return cancelStatus;
     }
+
+    /* output method */
+
+
 
     /*method that overrides the compareTo method in the Comparable interface to compare customer last names */
 

@@ -4,20 +4,20 @@ import java.util.Scanner;
 
 public class MainProgram {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         /*completely unfinished*/
 
+        Activity.letterFileWiper();
         Scanner scan = new Scanner(System.in);
         SortedArrayList<Activity> activityArrayList = new SortedArrayList<>();
         SortedArrayList<Customer> customerArrayList = new SortedArrayList<>();
         reader(activityArrayList, customerArrayList);
         start(activityArrayList, customerArrayList, scan);
-
     }
 
     /*start*/
-    public static void start(SortedArrayList<Activity> activity, SortedArrayList<Customer> customer, Scanner scan) {
+    public static void start(SortedArrayList<Activity> activity, SortedArrayList<Customer> customer, Scanner scan) throws IOException {
 
         while (optionMenu(activity, customer,scan)){
             optionMenu(activity, customer,scan);
@@ -108,12 +108,16 @@ public class MainProgram {
                             try {
                                 ticketsBought = Integer.parseInt(scan.next());
                             } catch (NumberFormatException e) {
-                                System.out.println("Enter a valid number only");
+                                System.out.println("Enter a valid number only\n");
                                 break;
                             }
 
-                            if (Activity.buyUpdate(activity, enteredActivity, ticketsBought)) {
-                                Customer.activityBuyUpdate(customer, ticketsBought, enteredActivity, first, last);
+                            try {
+                                if (Activity.buyUpdate(activity, enteredActivity, ticketsBought, first)) {
+                                    Customer.activityBuyUpdate(customer, ticketsBought, enteredActivity, first, last);
+                                }
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
                             }
                         }
                     }
@@ -133,22 +137,24 @@ public class MainProgram {
                     if (!updateAnswer.equals("yes")) {
                         break;
                     } else {
-                        System.out.println("Enter the Activity this customer wants to cancel tickets for\n");
-                        String enteredActivity = scan.nextLine().toLowerCase();
+                        if (Customer.registered(customer, firstName, lastName)) {
+                            System.out.println("Enter the Activity this customer wants to cancel tickets for\n");
+                            String enteredActivity = scan.nextLine().toLowerCase();
 
-                        if (Activity.activityExists(activity, enteredActivity)) {
-                            System.out.println("To update this customers tickets enter the number of tickets you wish to cancel\n");
-                            Integer ticketsCancelled = 0;
+                            if (Activity.activityExists(activity, enteredActivity)) {
+                                System.out.println("To update this customers tickets enter the number of tickets you wish to cancel\n");
+                                Integer ticketsCancelled = 0;
 
-                            try {
-                                ticketsCancelled = Integer.parseInt(scan.next());
-                            } catch (NumberFormatException e) {
-                                System.out.println("Enter a valid number only");
-                                break;
-                            }
+                                try {
+                                    ticketsCancelled = Integer.parseInt(scan.next());
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Enter a valid number only\n");
+                                    break;
+                                }
 
-                            if (Customer.activityCancelUpdate(customer, ticketsCancelled, enteredActivity, firstName, lastName)) {
-                                Activity.cancelUpdate(activity, enteredActivity, ticketsCancelled);
+                                if (Customer.activityCancelUpdate(customer, ticketsCancelled, enteredActivity, firstName, lastName)) {
+                                    Activity.cancelUpdate(activity, enteredActivity, ticketsCancelled);
+                                }
                             }
                         }
                     }
@@ -160,6 +166,5 @@ public class MainProgram {
         }
         return true;
     }
-
 }
 
