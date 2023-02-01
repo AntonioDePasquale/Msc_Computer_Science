@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="ocean_cleanup.JS"defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="ocean_cleanup.css">
@@ -9,7 +10,8 @@
 </head>
 
 <body>
-    <header class="header_container">
+    <script src="ocean_cleanup.JS"defer></script>
+    <header class="header_container" type = "text/css">
         <div class="title_container" style="margin-left: auto">
         <h1>
             <span class="h1_span_1">THE</span><span class="h1_span_2">OCEAN</span><span class="h1_span_3">CLEANUP</span>
@@ -56,7 +58,7 @@
             <div>Plastic pollution harms an estimated 100,000 sea turtles and marine mammals and 1,000,000 sea creatures each year. Larger plastics (called "macroplastics") such as plastic shopping bags can clog the digestive tracts of larger animals when consumed by them and can cause starvation through restricting the movement of food, or by filling the stomach and tricking the animal into thinking it is full. Microplastics on the other hand harm smaller marine life. For example, pelagic plastic pieces in the center of our ocean’s gyres outnumber live marine plankton, and are passed up the food chain to reach all marine life as well as human consumers.</div>
         </section>
 
-        <section id="decomposition_table" class="main_text">
+        <div id="decomposition_table" class="main_text">
             <div class="table_container">
                 <div class="table_title">
                     <div>How long until it's gone?</div>
@@ -113,7 +115,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
         <section class="main_text">
             <h2 class="h2_titles">History</h2>
@@ -138,7 +140,7 @@
         </section>
 
         <section class="main_text">
-            <h3>Ocean Cleanup</h3>
+            <h3 class="h3_titles">Ocean Cleanup</h3>
             <div>The filtering system uses passive floating structures localized in the ocean gyres. These structures act as a containment boom. The floater drifts with the wind, waves and ocean currents to capture marine debris. A permeable screen underneath the float catches subsurface debris. The system is unmanned and incorporates solar-powered monitoring and navigation systems, including GPS, cameras, lanterns and an automatic identification system (AIS) for vessel traffic services.</div>
             <div class="polaroid_container_3">
                 <div class="polaroid">
@@ -154,7 +156,7 @@
         </section>
 
         <section class="main_text">
-            <h3>River Interception</h3>
+            <h3 class="h3_titles">River Interception</h3>
             <div class="polaroid_container_4">
                 <div class="polaroid">
                     <img src="http://homepages.cs.ncl.ac.uk/harold.fellermann/csc8018/ocean_cleanup/resources/interceptor.jpg" alt="Picture of Interceptor in the Domenican Republic">
@@ -171,49 +173,107 @@
             <h3 class="h3_titles">Plastic Recycling</h3>
             <div>In October 2020, The Ocean Cleanup launched their first product made from plastic collected from the Great Pacific Garbage Patch, The Ocean Cleanup Sunglasses. The organization worked with DNV GL to develop a certification for plastic from water sources and the sunglasses were certified to originate from the GPGP. Revenue from the sale of recycling products go into their continued cleanup projects.</div>
         </section>
+        <section class="calculator">
+            <div class="h2_calc_titles">Check Your Own Plastic Footprint</div>
 
-        <section class="main_text">
-            <h2 class="h2_titles">Check Your Own Plastic Footprint</h2>
             <div>
-                <h3>Food & Kitchen</h3>
-                <div>    Plastic bottles                         <input type="number" step="1"> / week</div>
-                <div>    Plastic bags                            <input type="number" step="1"> / week</div>
-                <div>    Food wrapping                           <input type="number" step="1"> / week</div>
-                <div>    Yogurt, cream, etc. containers          <input type="number" step="1"> / week</div>
+                <h3 class="h3_calc_titles">Food & Kitchen</h3>
+                <form action="" class="food_form">
+                    <div class="calc_rows">
+                        <label class="row_1" for="bottleID">    Plastic bottles</label>
+                        <div><input type="number" step="any" placeholder = "0" id="bottleID" name="bottle_no" class="row_2"> / week</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="bag_no" class="row_1">    Plastic bags</label>
+                        <div><input type="number" step="1" placeholder = "0" onkeydown=change() id="bag_no" name="bag_no" class="row_2"> / week</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="wrapping_no" class="row_1">    Food wrapping</label>
+                        <div><input type="number" step="1" placeholder = "0" id="wrapping_no" name="wrapping_no" class="row_2"> / week</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="container_no" class="row_1">    Yogurt, cream, etc. containers</label>
+                        <div><input type="number" step="1" placeholder = "0" id="container_no" name="container_no" class="row_2"> / week</div>
+                    </div>
+                </form>
             </div>
+
             <div>
-                <h3>Disposable Containers & Packaging</h3>
-                <div>    Take-away plastic boxes                 <input type="number" step="1"> / month</div>
-                <div>    Take-away cups                          <input type="number" step="1"> / month</div>
-                <div>    Plastic-wrapped packages                <input type="number" step="1"> / month</div>
+                <h3 class="h3_calc_titles">Disposable Containers & Packaging</h3>
+                <form action="" class="packaging_form">
+                    <div class="calc_rows">
+                        <label for="box_no" class="row_1">    Take-away plastic boxes</label>
+                        <div><input type="number" step="1" placeholder = "0" id="box_no" name="box_no" class="row_2"> / month</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="takeaway_no" class="row_1">    Take-away cups</label>
+                        <div><input type="number" step="1" placeholder = "0" id="takeaway_no" name="takeaway_no" class="row_2"> / month</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="packages_no" class="row_1">    Plastic-wrapped packages</label>
+                        <div><input type="number" step="1" placeholder = "0" id="packages_no" name="packages_no" class="row_2"> / month</div>
+                    </div>
+                </form>
             </div>
+
             <div>
-                <h3>Bathroom & Laundry</h3>
-                <div>    Detergent & cleaning product bottles    <input type="number" step="1"> / year</div>
-                <div>    Shampoo, conditioner & toiletries       <input type="number" step="1"> / year</div>
-                <div>    Plastic toothbrushes                    <input type="number" step="1"> / year</div>
-                <div>    Toothpaste                              <input type="number" step="1"> / year</div>
+                <h3 class="h3_calc_titles">Bathroom & Laundry</h3>
+                <form action="" class="laundry_form">
+                    <div class="calc_rows">
+                        <label for="cleaning_no" class="row_1">    Detergent & cleaning product bottles</label>  
+                        <div><input type="number" step="1" placeholder = "0" id="cleaning_no" name="cleaning_no" class="row_2"> / year</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="toiletry_no" class="row_1">    Shampoo, conditioner & toiletries</label>
+                        <div><input type="number" step="1" placeholder = "0" id="toiletry_no" name="toiletry_no" class="row_2"> / year</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="toothbrush_no" class="row_1">    Plastic toothbrushes</label>
+                        <div><input type="number" step="1" placeholder = "0" id="toothbrush_no" name="toothbrush_no" class="row_2"> / year</div>
+                    </div>
+                    <div class="calc_rows">
+                        <label for="toothpaste_no" class="row_1">    Toothpaste</label>
+                        <div><input type="number" step="1" placeholder = "0" id="toothpaste_no" name="toothpaste_no" class="row_2"> / year</div>
+                    </div>
+                </form>
             </div>
+
             <div>
-                <h3>Household size</h3>
-                <div>    With how many people do you share your household products?  1</div>
+                <h3 class="h3_calc_titles">Household size</h3>
+                <form class="calc_rows">
+                    <label for="household_no" class="dropdown_text">    With how many people do you share your household products?</label>
+                    <select id = "household_no" name = "numberdrop" class="dropdown">
+                        <option value = "0">0</option>
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                        <option value = "4">4</option>
+                        <option value = "5">5</option>
+                    </select>
+                </form>
             </div>
+
             <div>
-                <h3>Your Plastic Footprint</h3>
-                <div>    Your estimated plastic footprint is 0 kg / year.</div>
+                <h3 class="h3_calc_titles">Your Plastic Footprint</h3>
+                <div class="calc_rows">
+                    <label for="result" class="row_1">    Your estimated plastic footprint is</label>
+                    <div id="result" name="result" class="row_2"> 0 kg / year.</div>
+                </div>
             </div>
+
             <div>
-                <h3>Tip</h3>
-                <div>    Most of your plastic waste originates from unknown sources.</div>
+                <h3 class="h3_calc_titles">Tip</h3>
+                <div id="tipID">    Most of your plastic waste originates from unknown sources.</div>
             </div>
-            <div class="calc_button">
-                Reset calculator
-            </div>
+
+            <form class="calc_button">
+                <button type="reset" id="reset_button" value="Reset Calculator">Reset Calculator</button>
+            </form>
+
         </section>
     </div>
-
-    <footer>
-        <div class="footer_text">Text and images adapted from Wikipedia and The Ocean Cleanup.</div>
+    <footer type = "text/css">
+        <div class="footer_text">Text and images adapted from <span class="footer_span"> Wikipedia </span> and <span class="footer_span"> The Ocean Cleanup</span>.</div>
     </footer>
 </body>
 
