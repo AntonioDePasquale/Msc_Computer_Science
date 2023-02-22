@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Date;
 
 public final class SmartCard {
@@ -6,15 +7,57 @@ public final class SmartCard {
 
     private final DateObj dateOfBirth;
 
-    private final String smartCardNumber;
+    private final SmartCardNumber smartCardNumber;
 
     private final DateObj dateIssued;
 
+    private Date expiryDate;
 
-    public SmartCard(Name staffName, String smartCardNumber, DateObj dateIssued, DateObj dateOfBirth) {
+
+    public SmartCard(Name staffName, SmartCardNumber smartCardNumber, DateObj dateIssued, DateObj dateOfBirth) {
         this.staffName = staffName;
         this.smartCardNumber = smartCardNumber;
         this.dateIssued = dateIssued;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getStaffName() {
+        return staffName.getFullName();
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth.getDate();
+    }
+
+    public String getSmartCardNumber() {
+        return smartCardNumber.getFullCardNumber();
+    }
+
+    public Date getDateIssued() {
+        return dateIssued.getDate();
+    }
+
+    public Calendar getDateIssuedCalendar() {
+        return dateIssued.getCalendar();
+    }
+
+    private void setExpiryDate(AbstractStaff staff) {
+        Calendar expiryCal = getDateIssuedCalendar();
+
+        if (staff.getStaffEmploymentStatus().equals("fixed-term")) {
+            expiryCal.add(Calendar.YEAR, 2);
+            expiryDate = expiryCal.getTime();
+        } else if (staff.getStaffEmploymentStatus().equals("permanent")) {
+            expiryCal.add(Calendar.YEAR, 10);
+            expiryDate = expiryCal.getTime();
+        }
+    }
+
+    public Date getExpiryDate() {
+        if (expiryDate == null) {
+            throw new IllegalArgumentException("expiryDate is null and has not been set");
+        } else {
+            return expiryDate;
+        }
     }
 }

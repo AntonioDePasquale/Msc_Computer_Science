@@ -41,10 +41,30 @@ public class StaffManager {
 		return moduleSet;
 	}
 
-
 	public Set<Name> readInStudents(String path)   {
 		//add your code here. Do NOT change the method signature
-		return null;
+		Set<Name> studentNameSet = new HashSet<Name>();
+
+		try {
+			Scanner scan = new Scanner(new File(path));  //reads csv file location//
+			while (scan.hasNextLine()) {                                            //while there is a nextline assign it to line//
+				String line = scan.nextLine();
+				if (line.isEmpty()) {                                                 //if the line is empty continue out of while loop//
+					continue;
+				}
+				String[] nameAttributes = line.split(",");                           //splits each line into an array of attributes//
+
+				String firstName = nameAttributes[0].trim();               //parses index[0] to int, assigns own variable//
+				String secondName = nameAttributes[1].trim();                                //index[1] is already string, assigns own variable//
+
+				//individual attributes can now be passed into the Exhibit constructor to create an exhibit object//
+				Name studentName = new Name(firstName, secondName);
+				studentNameSet.add(studentName);               //adds the newly created exhibit object to the arraylist in museum//
+			}
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		return studentNameSet;
 	}
 
 

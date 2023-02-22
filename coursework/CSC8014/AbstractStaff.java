@@ -8,8 +8,18 @@ public abstract class AbstractStaff implements Staff{
     AbstractStaff(SmartCard card, StaffID id, String fixedOrContract) {
         this.card = card;
         this.id = id;
-        this.employmentStatus = fixedOrContract;
         this.staffType = null;
+
+        if (fixedOrContract == null) {
+            throw new IllegalArgumentException("Contract type is null");
+        }
+        if (fixedOrContract.equalsIgnoreCase("fixed-term")) {
+            this.employmentStatus = "fixed-term";
+        } else if (fixedOrContract.equalsIgnoreCase("permanent")) {
+            this.employmentStatus = "permanent";
+        } else {
+            throw new IllegalArgumentException("\"Enter either \"fixed-term\" or \"permanent\"");
+        }
     }
 
     /**

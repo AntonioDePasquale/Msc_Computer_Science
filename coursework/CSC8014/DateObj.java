@@ -5,7 +5,6 @@ public class DateObj {
 
     private final Calendar calDate = Calendar.getInstance();
 
-    private Date date;
     private final Integer year, month, day;
 
     DateObj(Integer year, Integer month, Integer day) {
@@ -16,7 +15,22 @@ public class DateObj {
     }
 
     public Date getDate() {
-        date = calDate.getTime();
-        return date;
+        return calDate.getTime();
+    }
+
+    public Calendar getCalendar() {
+        return calDate;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public Integer getDay() {
+        return day;
     }
 }
