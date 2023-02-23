@@ -4,12 +4,8 @@ public final class Researcher extends AbstractStaff{
 
     private final Set<String> studentNameList;
 
-    private final String staffType;
-
-    Researcher(SmartCard card, StaffID id, String fixedOrContract, Name allNames) {
-        super(card, id, fixedOrContract);
-        this.studentNameList = allNames.getStudentNames();
-        this.staffType = "Researcher";
+    public Researcher(SmartCard card, String employmentStatus, String staffType, StaffID id) {
+        super(card, employmentStatus, staffType, id);
     }
 
     /**

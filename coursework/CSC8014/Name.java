@@ -9,10 +9,18 @@ public final class Name {
 
     private final String firstName;
     private final String lastName;
+    private final String fullName;
 
-    Name(String firstName, String lastName) {
+    private Name(String firstName, String lastName, String fullName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = fullName;
+    }
+
+    public static Name getInstance(String first, String last) {
+        String fullName = first + " " + last;
+
+        return new Name(first, last, fullName);
     }
 
 
@@ -29,6 +37,6 @@ public final class Name {
     }
 
     public String getFullName() {
-        return firstName + " " + lastName;
+        return fullName;
     }
 }

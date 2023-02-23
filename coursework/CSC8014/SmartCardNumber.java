@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -5,25 +6,26 @@ public final class SmartCardNumber {
 
     private final String nameInitials, fullCardNumber;
     private static Integer serialNumber = 10;
-    private final Integer issueYear;
 
     private static final Map<String, SmartCardNumber> SMARTCARDNUMS = new HashMap<String, SmartCardNumber>();
 
-    private SmartCardNumber(Name nameObj, Integer issueYear, String fullCardNumber) {
+    private SmartCardNumber(Name nameObj, String fullCardNumber) {
         /*
     smart card numbers must be unique, use factory methods to create
      */
         this.nameInitials = createInitialPrefix(nameObj);
-        this.issueYear = issueYear;
         this.fullCardNumber = fullCardNumber;
         serialNumber = serialNumberIncrement();
     }
 
-    public static SmartCardNumber getInstance(Name nameObj, Integer issueYear) {
+    public static SmartCardNumber getInstance(Name nameObj) {
+        Calendar newCal = Calendar.getInstance();
+        Integer issueYear = newCal.get(Calendar.YEAR);
+
         String fullCardNumber = createInitialPrefix(nameObj) + "-" + serialNumberIncrement() + "-" + issueYear;
         SmartCardNumber num = SMARTCARDNUMS.get(fullCardNumber);
         if (num == null) {
-            num = new SmartCardNumber(nameObj, issueYear, fullCardNumber);
+            num = new SmartCardNumber(nameObj, fullCardNumber);
             SMARTCARDNUMS.put(fullCardNumber, num);
         }
         return num;
@@ -42,10 +44,6 @@ public final class SmartCardNumber {
 
     public String getFullCardNumber() {
         return fullCardNumber;
-    }
-
-    public Integer getIssueYear() {
-        return issueYear;
     }
 
     public String getNameInitials() {

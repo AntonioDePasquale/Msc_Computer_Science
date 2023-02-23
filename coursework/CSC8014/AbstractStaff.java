@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public abstract class AbstractStaff implements Staff{
 
     private final StaffID id;
@@ -5,21 +7,39 @@ public abstract class AbstractStaff implements Staff{
     private final String employmentStatus;
     private final String staffType;
 
-    AbstractStaff(SmartCard card, StaffID id, String fixedOrContract) {
+    AbstractStaff(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         this.card = card;
+        this.staffType = staffType;
         this.id = id;
-        this.staffType = null;
 
-        if (fixedOrContract == null) {
+        if (employmentStatus == null) {
             throw new IllegalArgumentException("Contract type is null");
         }
-        if (fixedOrContract.equalsIgnoreCase("fixed-term")) {
+        if (employmentStatus.equalsIgnoreCase("fixed-term")) {
             this.employmentStatus = "fixed-term";
-        } else if (fixedOrContract.equalsIgnoreCase("permanent")) {
+        } else if (employmentStatus.equalsIgnoreCase("permanent")) {
             this.employmentStatus = "permanent";
         } else {
             throw new IllegalArgumentException("\"Enter either \"fixed-term\" or \"permanent\"");
         }
+    }
+
+    public static Staff getInstance(String employmentStatus, String staffType, Date dob, Name staffName, SmartCard newCard) {
+
+        StaffID newStaffId = StaffID.getInstance();
+        Staff result;
+
+        if (staffType == null) {
+            throw new IllegalArgumentException("Staff type is null");
+        }
+        if (employmentStatus.equalsIgnoreCase("lecturer")) {
+            result = new Lecturer(newCard,employmentStatus, staffType, newStaffId);
+        } else if (employmentStatus.equalsIgnoreCase("researcher")) {
+           result = new Researcher(newCard, employmentStatus, staffType, newStaffId);
+        } else {
+            throw new IllegalArgumentException("\"Enter either \"lecturer\" or \"researcher\"");
+        }
+        return result;
     }
 
     /**

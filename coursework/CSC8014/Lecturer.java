@@ -4,13 +4,10 @@ public final class Lecturer extends AbstractStaff {
 
     private final Module module;
 
-    private final String staffType;
-
-    Lecturer(SmartCard card, StaffID id, String fixedOrContract, Module taughtModules) {
-        super(card, id, fixedOrContract);
-        this.module = taughtModules;
-        this.staffType = "Lecturer";
+    public Lecturer(SmartCard card, String employmentStatus, String staffType, StaffID id) {
+        super(card, employmentStatus, staffType, id);
     }
+
 
     /**
      * Implementation of getStaffType outlined in the Staff interface.

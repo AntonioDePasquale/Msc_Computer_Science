@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class StaffManager {
@@ -58,7 +60,7 @@ public class StaffManager {
 				String secondName = nameAttributes[1].trim();                                //index[1] is already string, assigns own variable//
 
 				//individual attributes can now be passed into the Exhibit constructor to create an exhibit object//
-				Name studentName = new Name(firstName, secondName);
+				Name studentName = Name.getInstance(firstName, secondName);
 				studentNameSet.add(studentName);               //adds the newly created exhibit object to the arraylist in museum//
 			}
 		} catch (FileNotFoundException e) {
@@ -66,7 +68,6 @@ public class StaffManager {
 		}
 		return studentNameSet;
 	}
-
 
 	public int noOfStaff(String type) { 
 		//add your code here. Do NOT change the method signature
@@ -83,7 +84,11 @@ public class StaffManager {
 
 	public Staff employStaff(String firstName, String lastName, Date dob, String staffType, String employmentStatus) {
 		//add your code here. Do NOT change the method signature
-		return null;
+		Name staffName = Name.getInstance(firstName, lastName);
+		SmartCard staffSmartCard = SmartCard.getInstance(staffName, dob);
+
+		Staff staffMember = AbstractStaff.getInstance(employmentStatus, staffType, dob, staffName, staffSmartCard);
+		return staffMember;
 	}
 
 
@@ -96,6 +101,12 @@ public class StaffManager {
 	public void terminateStaff(StaffID id) {
 		//add your code here. Do NOT change the method signature
 
+	}
+
+	public static Calendar dateToCalendar(Date date) {
+		Calendar newCal = Calendar.getInstance();
+		newCal.setTime(date);
+		return newCal;
 	}
 
 

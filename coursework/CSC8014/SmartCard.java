@@ -5,20 +5,30 @@ public final class SmartCard {
 
     private final Name staffName;
 
-    private final DateObj dateOfBirth;
+    private final Date dateOfBirth;
 
     private final SmartCardNumber smartCardNumber;
 
-    private final DateObj dateIssued;
+    private final Date dateIssued;
 
     private Date expiryDate;
 
 
-    public SmartCard(Name staffName, SmartCardNumber smartCardNumber, DateObj dateIssued, DateObj dateOfBirth) {
+    private SmartCard(Name staffName, SmartCardNumber smartCardNumber, Date dateIssued, Date dateOfBirth) {
         this.staffName = staffName;
         this.smartCardNumber = smartCardNumber;
         this.dateIssued = dateIssued;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public static SmartCard getInstance(Name staffName, Date dateOfBirth) {
+
+        Calendar newCal = Calendar.getInstance();
+        Date issuedDate = newCal.getTime();
+
+        SmartCardNumber smartCardNumber = SmartCardNumber.getInstance(staffName);
+
+        return new SmartCard(staffName, smartCardNumber, issuedDate, dateOfBirth);
     }
 
     public String getStaffName() {
@@ -26,7 +36,7 @@ public final class SmartCard {
     }
 
     public Date getDateOfBirth() {
-        return dateOfBirth.getDate();
+        return dateOfBirth;
     }
 
     public String getSmartCardNumber() {
@@ -34,15 +44,11 @@ public final class SmartCard {
     }
 
     public Date getDateIssued() {
-        return dateIssued.getDate();
-    }
-
-    public Calendar getDateIssuedCalendar() {
-        return dateIssued.getCalendar();
+        return dateIssued;
     }
 
     private void setExpiryDate(AbstractStaff staff) {
-        Calendar expiryCal = getDateIssuedCalendar();
+        Calendar expiryCal = StaffManager.dateToCalendar(getDateIssued());
 
         if (staff.getStaffEmploymentStatus().equals("fixed-term")) {
             expiryCal.add(Calendar.YEAR, 2);
