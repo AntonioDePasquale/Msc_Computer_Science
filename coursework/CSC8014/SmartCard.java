@@ -1,7 +1,7 @@
 import java.util.Calendar;
 import java.util.Date;
 
-public final class SmartCard {
+public final class SmartCard implements Comparable<SmartCard> {
 
     private final Name staffName;
 
@@ -64,6 +64,14 @@ public final class SmartCard {
             throw new IllegalArgumentException("expiryDate is null and has not been set");
         } else {
             return expiryDate;
+        }
+    }
+    @Override
+    public int compareTo(SmartCard staffCard) {
+        if (this.getStaffName().compareTo(staffCard.getStaffName()) == 0) {
+            return this.getDateOfBirth().compareTo(staffCard.getDateOfBirth());
+        } else {
+            return this.getStaffName().compareTo(staffCard.getStaffName());
         }
     }
 }

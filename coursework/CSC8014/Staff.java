@@ -34,13 +34,16 @@ public interface Staff {
 	 */
 	String getStaffEmploymentStatus();
 
-	
+
 	/**
-	 * Returns the Staff type. 
+	 * Returns the Staff type.
 	 * a Staff can be either a Lecturer or a Researcher
+	 *
 	 * @return a string (Lecturer or Researcher)
 	 */
-    String getStaffType();
+	static String getStaffType() {
+		return null;
+	}
 
-    
+
 }

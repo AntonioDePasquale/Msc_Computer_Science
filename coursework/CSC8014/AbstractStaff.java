@@ -5,7 +5,7 @@ public abstract class AbstractStaff implements Staff{
     private final StaffID id;
     private final SmartCard card;
     private final String employmentStatus;
-    private final String staffType;
+    private static String staffType;
 
     AbstractStaff(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         this.card = card;
@@ -78,7 +78,7 @@ public abstract class AbstractStaff implements Staff{
      * a Staff can be either a Lecturer or a Researcher
      * @return a string (Lecturer or Researcher)
      */
-    public String getStaffType() {
+    public static String getStaffType() {
         return staffType;
     }
 

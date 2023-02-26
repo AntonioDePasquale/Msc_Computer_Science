@@ -11,18 +11,11 @@ public final class Name {
     private final String lastName;
     private final String fullName;
 
-    private Name(String firstName, String lastName, String fullName) {
+    public Name(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.fullName = fullName;
+        this.fullName = firstName + " " + lastName;
     }
-
-    public static Name getInstance(String first, String last) {
-        String fullName = first + " " + last;
-
-        return new Name(first, last, fullName);
-    }
-
 
     public Set<String> getStudentNames() {
         return studentNames;

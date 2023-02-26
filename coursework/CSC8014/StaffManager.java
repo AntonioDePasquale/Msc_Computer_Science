@@ -10,9 +10,11 @@ public class StaffManager {
 	//you can add attributes and other methods if needed. 
 	//you can throw an exception if needed
 
-
+	private final Map<StaffID, Staff> staffMap = new HashMap<>();
 	public static void main(String[] args) {
+
 		readInModules("CSC8014/modules.TXT");
+		readInStudents("CSC8014/students.TXT");
 	}
 
 	public static Set<Module> readInModules(String path) {
@@ -43,7 +45,7 @@ public class StaffManager {
 		return moduleSet;
 	}
 
-	public Set<Name> readInStudents(String path)   {
+	public static Set<Name> readInStudents(String path)   {
 		//add your code here. Do NOT change the method signature
 		Set<Name> studentNameSet = new HashSet<Name>();
 
@@ -54,13 +56,13 @@ public class StaffManager {
 				if (line.isEmpty()) {                                                 //if the line is empty continue out of while loop//
 					continue;
 				}
-				String[] nameAttributes = line.split(",");                           //splits each line into an array of attributes//
+				String[] nameAttributes = line.split(" ");                           //splits each line into an array of attributes//
 
 				String firstName = nameAttributes[0].trim();               //parses index[0] to int, assigns own variable//
 				String secondName = nameAttributes[1].trim();                                //index[1] is already string, assigns own variable//
 
 				//individual attributes can now be passed into the Exhibit constructor to create an exhibit object//
-				Name studentName = Name.getInstance(firstName, secondName);
+				Name studentName = new Name(firstName, secondName);
 				studentNameSet.add(studentName);               //adds the newly created exhibit object to the arraylist in museum//
 			}
 		} catch (FileNotFoundException e) {
@@ -84,10 +86,19 @@ public class StaffManager {
 
 	public Staff employStaff(String firstName, String lastName, Date dob, String staffType, String employmentStatus) {
 		//add your code here. Do NOT change the method signature
-		Name staffName = Name.getInstance(firstName, lastName);
+		Name staffName = new Name(firstName, lastName);
 		SmartCard staffSmartCard = SmartCard.getInstance(staffName, dob);
 
 		Staff staffMember = AbstractStaff.getInstance(employmentStatus, staffType, dob, staffName, staffSmartCard);
+
+		for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
+			if (entry.getValue().getSmartCard().compareTo(staffSmartCard) != 0) {
+				StaffID id = staffMember.getStaffID();
+				staffMap.put(id, staffMember);
+			} else {
+				throw new IllegalArgumentException("A staff member with this name of " + staffType + "already exists");
+			}
+		}
 		return staffMember;
 	}
 

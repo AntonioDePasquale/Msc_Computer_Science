@@ -14,8 +14,8 @@ public final class Researcher extends AbstractStaff{
      * a Staff can be either a Lecturer or a Researcher
      * @return a string (Lecturer or Researcher)
      */
-    public String getStaffType(){
-        return staffType;
+    public static String getStaffType(){
+        return AbstractStaff.getStaffType();
     }
 
     /**
