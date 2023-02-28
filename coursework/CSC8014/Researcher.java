@@ -11,16 +11,8 @@ public final class Researcher extends AbstractStaff {
     }
 
     /**
-     * Implementation of getStaffType outlined in the Staff interface.
-     * Returns the Staff type.
-     * a Staff can be either a Lecturer or a Researcher
-     * @return a string (Lecturer or Researcher)
-     */
-
-    /**
-     * Returns the names of students supervised by the researcher.
-     *
-     * @return Set of student name Strings.
+     * Returns the set of student names supervised by the researcher.
+     * @return Set of student name objects.
      */
     Set<Name> getStudentNameSet() {
         return studentNameSet;

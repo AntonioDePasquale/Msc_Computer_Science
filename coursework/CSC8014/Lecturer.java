@@ -1,6 +1,5 @@
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 
 public final class Lecturer extends AbstractStaff {
@@ -11,18 +10,10 @@ public final class Lecturer extends AbstractStaff {
         super(card, employmentStatus, staffType, id);
     }
 
-
     /**
-     * Implementation of getStaffType outlined in the Staff interface.
-     * Returns the Staff type.
-     * a Staff can be either a Lecturer or a Researcher
-     * @return a string (Lecturer or Researcher)
-     */
-
-    /**
-     * Returns the Lecturer module list.
+     * Returns the Lecturer module Set.
      * Module consists of a name, module code, a semester and number of credits.
-     * @return module object list.
+     * @return module object Set.
      */
     public Set<Module> getModuleList() {
         return moduleSet;

@@ -75,7 +75,8 @@ public abstract class AbstractStaff implements Staff{
     /**
      * Implementation of getStaffType outlined in the Staff interface.
      * Returns the Staff type.
-     * a Staff can be either a Lecturer or a Researcher
+     * a Staff can be either a Lecturer or a Researcher which is assigned on calling the getInstance creating
+     * either a researcher r lecturer.
      * @return a string (Lecturer or Researcher)
      */
     public String getStaffType() {
