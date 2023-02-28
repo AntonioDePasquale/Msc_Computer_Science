@@ -1,6 +1,8 @@
-import java.util.Date;
+package uk.ac.ncl.CSC8014_AntonioDePasquale;
 
-public abstract class AbstractStaff implements Staff{
+import uk.ac.ncl.CSC8014_AntonioDePasquale.Staff;
+
+public abstract class AbstractStaff implements Staff {
 
     private final StaffID id;
     private final SmartCard card;
@@ -8,7 +10,7 @@ public abstract class AbstractStaff implements Staff{
     private final String staffType;
 
     /**
-     * The AbstractStaff constructor.
+     * The uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff constructor.
      * Checks the staff contract type for either fixed-term or permanent and sets it to the employmentStatus variable.
      * Is set to private and only called when getInstance() is called. Which calls either the lecturer or researcher
      * constructor. The abstractStaff constructor is never called on its own.
@@ -31,7 +33,7 @@ public abstract class AbstractStaff implements Staff{
     }
 
     /**
-     * The AbstractStaff getInstance factory method.
+     * The uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff getInstance factory method.
      * Checks the staff type for either lecturer or researcher and depending on input calls the appropriate constructor.
      * Creates a staff ID object to be used in lecturer/researcher object instance.
      * @return returns the created staff instance (either lecturer or researcher depending on input).
@@ -42,7 +44,7 @@ public abstract class AbstractStaff implements Staff{
         Staff result = null;
 
         if (staffType == null) {
-            throw new IllegalArgumentException("Staff type is null");
+            throw new IllegalArgumentException("uk.ac.ncl.CSC8014_AntonioDePasquale.Staff type is null");
         }
         if (employmentStatus.equalsIgnoreCase("lecturer")) {
             result = new Lecturer(newCard,employmentStatus, staffType, newStaffId);
@@ -55,29 +57,29 @@ public abstract class AbstractStaff implements Staff{
     }
 
     /**
-     * Implementation of getStaffID outlined in the Staff interface.
+     * Implementation of getStaffID outlined in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff interface.
      * Returns the staff ID.
      * All staff must have an ID
-     * @return the StaffID object
+     * @return the uk.ac.ncl.CSC8014_AntonioDePasquale.StaffID object
      */
     public StaffID getStaffID() {
         return this.id;
     };
 
     /**
-     * Implementation of getSmartCard outlined in the Staff interface.
+     * Implementation of getSmartCard outlined in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff interface.
      * Returns the smart card.
      * All staff must have a smart card
-     * @return the SmartCard object
+     * @return the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard object
      */
     public SmartCard getSmartCard() {
         return this.card;
     }
 
     /**
-     * Implementation of getStaffEmploymentStatus outlined in the Staff interface.
-     * Returns the Staff employment status.
-     * a Staff can be either on Permanent or fixed contract
+     * Implementation of getStaffEmploymentStatus outlined in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff interface.
+     * Returns the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff employment status.
+     * a uk.ac.ncl.CSC8014_AntonioDePasquale.Staff can be either on Permanent or fixed contract
      * @return a string (Permanent or fixed)
      */
     public String getStaffEmploymentStatus() {
@@ -85,11 +87,11 @@ public abstract class AbstractStaff implements Staff{
     }
 
     /**
-     * Implementation of getStaffType outlined in the Staff interface.
-     * Returns the Staff type.
-     * a Staff can be either a Lecturer or a Researcher which is assigned on calling the getInstance creating
+     * Implementation of getStaffType outlined in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff interface.
+     * Returns the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff type.
+     * a uk.ac.ncl.CSC8014_AntonioDePasquale.Staff can be either a uk.ac.ncl.CSC8014_AntonioDePasquale.Lecturer or a uk.ac.ncl.CSC8014_AntonioDePasquale.Researcher which is assigned on calling the getInstance creating
      * either a researcher r lecturer.
-     * @return a string (Lecturer or Researcher)
+     * @return a string (uk.ac.ncl.CSC8014_AntonioDePasquale.Lecturer or uk.ac.ncl.CSC8014_AntonioDePasquale.Researcher)
      */
     public String getStaffType() {
         return this.staffType;

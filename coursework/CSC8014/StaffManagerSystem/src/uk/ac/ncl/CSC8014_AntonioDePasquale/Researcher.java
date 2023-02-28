@@ -1,3 +1,8 @@
+package uk.ac.ncl.CSC8014_AntonioDePasquale;
+
+import uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff;
+import uk.ac.ncl.CSC8014_AntonioDePasquale.Name;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -8,7 +13,7 @@ public final class Researcher extends AbstractStaff {
 
     /**
      * The constructor for the researcher class.
-     * calls the constructor from AbstractStaff when stafftype is "researcher"
+     * calls the constructor from uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff when stafftype is "researcher"
      */
     public Researcher(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         super(card, employmentStatus, staffType, id);

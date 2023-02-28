@@ -1,4 +1,4 @@
-
+package uk.ac.ncl.CSC8014_AntonioDePasquale;
 
 public final class Module {
 
@@ -8,7 +8,7 @@ public final class Module {
     private final Integer credits;
 
     /**
-     * Constructor for the Module class
+     * Constructor for the uk.ac.ncl.CSC8014_AntonioDePasquale.Module class
      * takes in the following parameters and sets them to variables.
      */
 
@@ -20,7 +20,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the credits of the Module
+     * Getter for the credits of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
      * @return the credits variable
      */
     public Integer getCredits() {
@@ -28,7 +28,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the moduleCode of the Module
+     * Getter for the moduleCode of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
      * @return the moduleCode variable
      */
     public String getModuleCode() {
@@ -36,7 +36,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the moduleName of the Module
+     * Getter for the moduleName of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
      * @return the moduleName variable
      */
     public String getModuleName() {
@@ -44,7 +44,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the semester of the Module
+     * Getter for the semester of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
      * @return the semester variable
      */
     public Integer getSemester() {

@@ -1,3 +1,7 @@
+package uk.ac.ncl.CSC8014_AntonioDePasquale;
+
+import uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -8,15 +12,15 @@ public final class Lecturer extends AbstractStaff {
 
     /**
      * The constructor for the researcher class.
-     * calls the constructor from AbstractStaff getInstance when stafftype is "Lecturer"
+     * calls the constructor from uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff getInstance when stafftype is "uk.ac.ncl.CSC8014_AntonioDePasquale.Lecturer"
      */
     public Lecturer(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         super(card, employmentStatus, staffType, id);
     }
 
     /**
-     * Returns the Lecturer module Set.
-     * Module consists of a name, module code, a semester and number of credits.
+     * Returns the uk.ac.ncl.CSC8014_AntonioDePasquale.Lecturer module Set.
+     * uk.ac.ncl.CSC8014_AntonioDePasquale.Module consists of a name, module code, a semester and number of credits.
      * @return module object Set.
      */
     public Set<Module> getModuleList() {
@@ -25,7 +29,7 @@ public final class Lecturer extends AbstractStaff {
 
     /**
      * function to add all modules in a Set entered as a parameter to the moduleSet in researcher.
-     * Iterates through set of modules, adds modules to the moduleSet in Lecturer one by one.
+     * Iterates through set of modules, adds modules to the moduleSet in uk.ac.ncl.CSC8014_AntonioDePasquale.Lecturer one by one.
      * At each step the number of total credits a lecturer is teaching is checked by lecturerModuleCreditCheck function.
      * If the credit total including the credits that would be added by the module being checked is 40 or less than
      * the current module is added to moduleSet.

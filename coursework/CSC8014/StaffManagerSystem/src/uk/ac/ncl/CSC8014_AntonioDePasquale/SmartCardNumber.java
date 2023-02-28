@@ -1,3 +1,5 @@
+package uk.ac.ncl.CSC8014_AntonioDePasquale;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +11,7 @@ public final class SmartCardNumber {
     private static final Map<String, SmartCardNumber> SMARTCARDNUMS = new HashMap<String, SmartCardNumber>();
 
     /**
-     * Constructor for SmartCardNumber which takes a Name obj and fullCardNumber as parameters.
+     * Constructor for uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber which takes a uk.ac.ncl.CSC8014_AntonioDePasquale.Name obj and fullCardNumber as parameters.
      * sets variables to appropriate parameters.
      * The serialNumber initialised as 10 is incremented by 1 with the serialNumberIncrement method.
      * As serial number is static each time an instance is created it will be unique to that instance.
@@ -23,9 +25,9 @@ public final class SmartCardNumber {
     }
 
     /**
-     * GetInstance factory method for creating instance of SmartCardNumber to ensure uniqueness.
+     * GetInstance factory method for creating instance of uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber to ensure uniqueness.
      * The full card number is created in the method using the name initials, serial number and issue year.
-     * @return the created SmartCardNumber instance if it doesn't currently exist in the static Map SMARTCARDNUMS.
+     * @return the created uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber instance if it doesn't currently exist in the static Map SMARTCARDNUMS.
      */
     public static SmartCardNumber getInstance(Name nameObj) {
         Calendar newCal = Calendar.getInstance();
@@ -61,7 +63,7 @@ public final class SmartCardNumber {
     }
 
     /**
-     * Getter for the fullCardNumber of the SmartCardNumber instance
+     * Getter for the fullCardNumber of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber instance
      * @return the fullCardNumber variable
      */
     public String getFullCardNumber() {
@@ -69,7 +71,7 @@ public final class SmartCardNumber {
     }
 
     /**
-     * Getter for the name initials of the SmartCardNumber instance
+     * Getter for the name initials of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber instance
      * @return the nameInitials variable
      */
     public String getNameInitials() {

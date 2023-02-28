@@ -1,3 +1,5 @@
+package uk.ac.ncl.CSC8014_AntonioDePasquale;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +12,7 @@ public final class Name {
     /**
      * Constructor for the name Object.
      * Takes in following variables as parameters and sets them to the appropriate variables
-     * on creation of new Name instance.
+     * on creation of new uk.ac.ncl.CSC8014_AntonioDePasquale.Name instance.
      * fullName is created by concatenating firstName and lastName.
      */
     public Name(String firstName, String lastName) {
@@ -20,7 +22,7 @@ public final class Name {
     }
 
     /**
-     * Getter for the first name of the Name instance
+     * Getter for the first name of the uk.ac.ncl.CSC8014_AntonioDePasquale.Name instance
      * @return the firstName variable
      */
     public String getFirstName() {
@@ -28,7 +30,7 @@ public final class Name {
     }
 
     /**
-     * Getter for the last name of the Name instance
+     * Getter for the last name of the uk.ac.ncl.CSC8014_AntonioDePasquale.Name instance
      * @return the lastName variable
      */
     public String getLastName() {
@@ -36,7 +38,7 @@ public final class Name {
     }
 
     /**
-     * Getter for the full name of the Name instance
+     * Getter for the full name of the uk.ac.ncl.CSC8014_AntonioDePasquale.Name instance
      * @return the fullName variable
      */
     public String getFullName() {
