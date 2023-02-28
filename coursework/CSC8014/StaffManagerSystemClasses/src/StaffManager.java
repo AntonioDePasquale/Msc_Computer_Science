@@ -147,7 +147,16 @@ public class StaffManager {
 		return false;
 	}
 
-
+	/**
+	 * Method to employ staff which creates a chain of new Obj instances using the given parameters.
+	 * Name object is created using the Name constructor from first name and lastName.
+	 * SmartCard is created using the Name object, dob and employments status as parameters using getInstance.
+	 * The SmartCardNumber object is created within the SmartCard getInstance method so that it is tied to the creation of SmartCards.
+	 * Using these Object instances the Abstract GetInstance method can be called which creates either a Lecturer or Researcher instance.
+	 * The age range is checked and the name and dob is checked against existing Staff instances using the compareTo() outlined in SmartCard.
+	 * this ensures that the same person cannot be employed twice.
+	 * @return the newly created Staff member is returned.
+	 */
 	public Staff employStaff (String firstName, String lastName, Date dob, String staffType, String employmentStatus) {
 		//add your code here. Do NOT change the method signature
 		Name staffName = new Name(firstName, lastName);
@@ -168,12 +177,21 @@ public class StaffManager {
 		}
 		return staffMember;
 	}
+
+	/**
+	 * method to get a collection view of all staff members in the staff map.
+	 * @return a collection view of all staff members.
+	 */
 	public Collection<Staff> getAllStaff () {
 		//add your code here. Do NOT change the method signature
 		return staffMap.values();
 	}
 
-
+	/**
+	 * Method to terminate the Staff member with the parameter StaffID.
+	 * Iterates over all staff members checking if their StaffId matches the parameter.
+	 * If they match the Staff member is removed from the staff map.
+	 */
 	public void terminateStaff (StaffID id){
 		//add your code here. Do NOT change the method signature
 		for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
@@ -183,12 +201,22 @@ public class StaffManager {
 		}
 	}
 
+	/**
+	 * Method to turn a Date object into a calendar.
+	 * Made to avoid repetition of code elsewhere in the project.
+	 * @return Calendar newCal which is the entered date parameter as a Calendar Object.
+	 */
 	public static Calendar dateToCalendar (Date date){
 		Calendar newCal = Calendar.getInstance();
 		newCal.setTime(date);
 		return newCal;
 	}
 
+	/**
+	 * Method to calculate the age of the Staff member.
+	 * Uses the difference between current date and parameter date of birth to find the age.
+	 * @returns age in years as an integer.
+	 */
 	public Integer calculateAge(Date dob) {
 		int birthYear = dateToCalendar(dob).get(Calendar.YEAR);
 		int birthMonth = dateToCalendar(dob).get(Calendar.MONTH);
