@@ -6,6 +6,10 @@ public final class Lecturer extends AbstractStaff {
 
     private static final Set<Module> moduleSet = new HashSet<>();
 
+    /**
+     * The constructor for the researcher class.
+     * calls the constructor from AbstractStaff getInstance when stafftype is "Lecturer"
+     */
     public Lecturer(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         super(card, employmentStatus, staffType, id);
     }
@@ -19,6 +23,13 @@ public final class Lecturer extends AbstractStaff {
         return moduleSet;
     }
 
+    /**
+     * function to add all modules in a Set entered as a parameter to the moduleSet in researcher.
+     * Iterates through set of modules, adds modules to the moduleSet in Lecturer one by one.
+     * At each step the number of total credits a lecturer is teaching is checked by lecturerModuleCreditCheck function.
+     * If the credit total including the credits that would be added by the module being checked is 40 or less than
+     * the current module is added to moduleSet.
+     */
     public static void addModuleList(Set<Module> modules) {
         Iterator<Module> modulesIterator = modules.iterator();
 
@@ -28,7 +39,6 @@ public final class Lecturer extends AbstractStaff {
                 moduleSet.add(currentModule);
         }
     }
-
 
     /**
      * Returns true if lecturer is teaching enough credits.
@@ -51,7 +61,7 @@ public final class Lecturer extends AbstractStaff {
     }
 
     /**
-     * Overloaded method of the lecturerModuleCreditCheck above which takes a parameter
+     * Overloaded method of the lecturerModuleCreditCheck above which takes a parameter to be used when new modules are added.
      * returns true if lecturer is teaching enough credits.
      * true if 40 credits in both semesters including the credits of the parameter module or false otherwise.
      * @return true or false.

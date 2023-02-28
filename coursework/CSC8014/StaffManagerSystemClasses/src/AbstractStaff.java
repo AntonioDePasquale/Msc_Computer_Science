@@ -7,7 +7,13 @@ public abstract class AbstractStaff implements Staff{
     private final String employmentStatus;
     private final String staffType;
 
-    AbstractStaff(SmartCard card, String employmentStatus, String staffType, StaffID id) {
+    /**
+     * The AbstractStaff constructor.
+     * Checks the staff contract type for either fixed-term or permanent and sets it to the employmentStatus variable.
+     * Is set to private and only called when getInstance() is called. Which calls either the lecturer or researcher
+     * constructor. The abstractStaff constructor is never called on its own.
+     */
+    public AbstractStaff(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         this.card = card;
         this.staffType = staffType;
         this.id = id;
@@ -24,10 +30,16 @@ public abstract class AbstractStaff implements Staff{
         }
     }
 
-    public static Staff getInstance(String employmentStatus, String staffType, Date dob, Name staffName, SmartCard newCard) {
+    /**
+     * The AbstractStaff getInstance factory method.
+     * Checks the staff type for either lecturer or researcher and depending on input calls the appropriate constructor.
+     * Creates a staff ID object to be used in lecturer/researcher object instance.
+     * @return returns the created staff instance (either lecturer or researcher depending on input).
+     */
+    public static Staff getInstance(String employmentStatus, String staffType, SmartCard newCard) {
 
         StaffID newStaffId = StaffID.getInstance();
-        Staff result;
+        Staff result = null;
 
         if (staffType == null) {
             throw new IllegalArgumentException("Staff type is null");
@@ -82,5 +94,4 @@ public abstract class AbstractStaff implements Staff{
     public String getStaffType() {
         return this.staffType;
     }
-
 }
