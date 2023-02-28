@@ -5,7 +5,7 @@ public abstract class AbstractStaff implements Staff{
     private final StaffID id;
     private final SmartCard card;
     private final String employmentStatus;
-    private static String staffType;
+    private final String staffType;
 
     AbstractStaff(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         this.card = card;
@@ -16,9 +16,9 @@ public abstract class AbstractStaff implements Staff{
             throw new IllegalArgumentException("Contract type is null");
         }
         if (employmentStatus.equalsIgnoreCase("fixed-term")) {
-            this.employmentStatus = "fixed-term";
+            this.employmentStatus = employmentStatus;
         } else if (employmentStatus.equalsIgnoreCase("permanent")) {
-            this.employmentStatus = "permanent";
+            this.employmentStatus = employmentStatus;
         } else {
             throw new IllegalArgumentException("\"Enter either \"fixed-term\" or \"permanent\"");
         }
@@ -78,8 +78,8 @@ public abstract class AbstractStaff implements Staff{
      * a Staff can be either a Lecturer or a Researcher
      * @return a string (Lecturer or Researcher)
      */
-    public static String getStaffType() {
-        return staffType;
+    public String getStaffType() {
+        return this.staffType;
     }
 
 }

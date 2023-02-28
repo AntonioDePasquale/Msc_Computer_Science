@@ -11,6 +11,9 @@ public class StaffManager {
 	//you can throw an exception if needed
 
 	private final Map<StaffID, Staff> staffMap = new HashMap<>();
+	private static final Set<Name> studentNameSet = new HashSet<Name>();
+	private static final Set<Module> moduleSet = new HashSet<Module>();
+
 	public static void main(String[] args) {
 
 		readInModules("CSC8014/modules.TXT");
@@ -19,7 +22,6 @@ public class StaffManager {
 
 	public static Set<Module> readInModules(String path) {
 		//add your code here. Do NOT change the method signature
-		Set<Module> moduleSet = new HashSet<Module>();
 
 		try {
 			Scanner scan = new Scanner(new File(path));  //reads csv file location//
@@ -45,9 +47,8 @@ public class StaffManager {
 		return moduleSet;
 	}
 
-	public static Set<Name> readInStudents(String path)   {
+	public static Set<Name> readInStudents(String path) {
 		//add your code here. Do NOT change the method signature
-		Set<Name> studentNameSet = new HashSet<Name>();
 
 		try {
 			Scanner scan = new Scanner(new File(path));  //reads csv file location//
@@ -71,57 +72,103 @@ public class StaffManager {
 		return studentNameSet;
 	}
 
-	public int noOfStaff(String type) { 
+	public int noOfStaff(String type) {
 		//add your code here. Do NOT change the method signature
-		return 0;
+		int count = 0;
+		String staffType = null;
+
+		if (type.equalsIgnoreCase("lecturer")) {
+			staffType = "lecturer";
+		} else if (type.equalsIgnoreCase("researcher")) {
+			staffType = "researcher";
+		} else {
+			throw new IllegalArgumentException("\"Enter either \"lecturer\" or \"researcher\"");
+		}
+
+		for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
+			Integer mapSize = staffMap.size();
+
+			if (entry.getValue().getStaffType().equalsIgnoreCase(staffType)) {
+				count++;
+			}
+		}
+		return count;
 	}
 
-
-
-	public boolean addData(StaffID id, Set<Module> modules, Set<Name> students) {		 
+	public boolean addData(StaffID id, Set<Module> modules, Set<Name> students) {
 		//add your code here. Do NOT change the method signature
+		for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
+			if (entry.getKey().toString().equalsIgnoreCase(id.toString())) {
+
+				String type = entry.getValue().getStaffType();
+
+				if (type.equalsIgnoreCase("lecturer")) {
+					Lecturer.addModuleList(modules);
+					return true;
+				} else if (type.equalsIgnoreCase("researcher")) {
+					Researcher.addStudentNames(students);
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
+		public Staff employStaff (String firstName, String lastName, Date dob, String staffType, String employmentStatus)
+		{
+			//add your code here. Do NOT change the method signature
+			Name staffName = new Name(firstName, lastName);
+			SmartCard staffSmartCard = SmartCard.getInstance(staffName, dob);
+			Staff staffMember = AbstractStaff.getInstance(employmentStatus, staffType, dob, staffName, staffSmartCard);
 
-	public Staff employStaff(String firstName, String lastName, Date dob, String staffType, String employmentStatus) {
-		//add your code here. Do NOT change the method signature
-		Name staffName = new Name(firstName, lastName);
-		SmartCard staffSmartCard = SmartCard.getInstance(staffName, dob);
-
-		Staff staffMember = AbstractStaff.getInstance(employmentStatus, staffType, dob, staffName, staffSmartCard);
-
-		for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
-			if (entry.getValue().getSmartCard().compareTo(staffSmartCard) != 0) {
-				StaffID id = staffMember.getStaffID();
-				staffMap.put(id, staffMember);
+			if (calculateAge(dob) >= 22 && calculateAge(dob) <= 67) {
+				for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
+					if (entry.getValue().getSmartCard().compareTo(staffSmartCard) != 0) {
+						StaffID id = staffMember.getStaffID();
+						staffMap.put(id, staffMember);
+					} else {
+						throw new IllegalArgumentException("A staff member with this name of " + staffType + "already exists");
+					}
+				}
 			} else {
-				throw new IllegalArgumentException("A staff member with this name of " + staffType + "already exists");
+				throw new IllegalArgumentException("A staff member must be at least 22 and at most 67");
+			}
+			return staffMember;
+		}
+		public Collection<Staff> getAllStaff () {
+			//add your code here. Do NOT change the method signature
+			return staffMap.values();
+		}
+
+
+		public void terminateStaff (StaffID id){
+			//add your code here. Do NOT change the method signature
+			for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
+				if (entry.getKey().toString().equalsIgnoreCase(id.toString())) {
+					staffMap.remove(id);
+				}
 			}
 		}
-		return staffMember;
+
+		public static Calendar dateToCalendar (Date date){
+			Calendar newCal = Calendar.getInstance();
+			newCal.setTime(date);
+			return newCal;
+		}
+
+		public Integer calculateAge(Date dob) {
+			int birthYear = dateToCalendar(dob).get(Calendar.YEAR);
+			int birthMonth = dateToCalendar(dob).get(Calendar.MONTH);
+			int birthDay = dateToCalendar(dob).get(Calendar.DAY_OF_YEAR);
+			Calendar currentDate = Calendar.getInstance();
+
+			currentDate.add(Calendar.YEAR, -birthYear);
+			currentDate.add(Calendar.MONTH, -birthMonth);
+			currentDate.add(Calendar.DAY_OF_YEAR, -birthDay);
+
+			return currentDate.get(Calendar.YEAR);
+		}
+
+
 	}
 
-
-	public Collection<Staff> getAllStaff() {
-		//add your code here. Do NOT change the method signature
-		return null;
-	}
-
-
-	public void terminateStaff(StaffID id) {
-		//add your code here. Do NOT change the method signature
-
-	}
-
-	public static Calendar dateToCalendar(Date date) {
-		Calendar newCal = Calendar.getInstance();
-		newCal.setTime(date);
-		return newCal;
-	}
-
-
-
-
-
-}

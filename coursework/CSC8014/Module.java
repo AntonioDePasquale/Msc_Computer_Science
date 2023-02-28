@@ -17,11 +17,19 @@ public final class Module {
         this.credits = credits;
     }
 
-    public String moduleNameList() {
-        ;
+    public Integer getCredits() {
+        return this.credits;
     }
 
-    public String totalModuleCredits() {
-        ;
+    public String getModuleCode() {
+        return moduleCode;
+    }
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public Integer getSemester() {
+        return semester;
     }
 }

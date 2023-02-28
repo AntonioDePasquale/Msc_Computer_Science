@@ -41,9 +41,7 @@ public interface Staff {
 	 *
 	 * @return a string (Lecturer or Researcher)
 	 */
-	static String getStaffType() {
-		return null;
-	}
+	String getStaffType();
 
 
 }
