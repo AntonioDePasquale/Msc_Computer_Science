@@ -15,8 +15,17 @@ public final class Module {
     public Module(String moduleCode, String moduleName, Integer semester, Integer credits) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
-        this.semester = semester;
-        this.credits = credits;
+
+        if (semester >= 1 && semester <= 3) {
+            this.semester = semester;
+        } else {
+            throw new IllegalArgumentException("Invalid semester");
+        }
+        if (credits >= 10 && credits <= 60) {
+            this.credits = credits;
+        } else {
+            throw new IllegalArgumentException("Invalid credits");
+        }
     }
 
     /**

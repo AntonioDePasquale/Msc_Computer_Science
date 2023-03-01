@@ -1,6 +1,5 @@
 package uk.ac.ncl.CSC8014.StaffManagerClasses;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -14,31 +13,52 @@ public class StaffManager {
 	//you can throw an exception if needed
 
 	/**
-	 * creation of collection objects to store uk.ac.ncl.CSC8014_AntonioDePasquale.Staff, Students and Modules.
-	 * staffMap is used to store employed uk.ac.ncl.CSC8014_AntonioDePasquale.Staff objects.
-	 * studentNameSet is used to store student uk.ac.ncl.CSC8014_AntonioDePasquale.Name objects.
+	 * creation of collection objects to store Staff, Students and Modules.
+	 * staffMap is used to store employed Staff objects.
+	 * studentNameSet is used to store student Name objects.
 	 * moduleSet is used to store module Objects.
 	 */
-	private final Map<StaffID, Staff> staffMap = new HashMap<>();
-	private static final Set<Name> studentNameSet = new HashSet<Name>();
-	private static final Set<Module> moduleSet = new HashSet<Module>();
+	private Map<StaffID, Staff> staffMap;
+	private Set<Name> studentNameSet;
+	private Set<Module> moduleSet;
 
 	/**
-	 * Main method left empty as per assignment program is not meant to be run.
+	 * Main method left empty as per assignment program is not meant to be run as it is incomplete.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {}
 
+	/**
+	 * static variable instance of singleton class
+	 */
+	private static StaffManager single_staffManager_instance = null;
+
+	/**
+	 *private constructor restricted to the class
+	 */
+	private StaffManager() {
+		staffMap =  new HashMap<>();
+		studentNameSet = new HashSet<>();
+		moduleSet = new HashSet<>();
 	}
 
+	/**
+	 * static method to create an instance of the singleton class.
+	 * singleton would be instantiated in a main class with StaffManager newStaffManager = StaffManager.getInstance();.
+	 * as the program is incomplete per coursework specification no main class has been created.
+	 */
+	public static StaffManager getInstance() {
+		if (single_staffManager_instance == null)single_staffManager_instance = new StaffManager();
+		return single_staffManager_instance;
+	}
 	/**
 	 * Method to read in the csv file of modules from the path given as a parameter.
 	 * @param path file path to read modules as csv from.
 	 * reads ech line of the csv one by one separating it into 4 variables by splitting at the comma.
-	 * each variable used as parameters in the uk.ac.ncl.CSC8014_AntonioDePasquale.Module constructor.
-	 * uk.ac.ncl.CSC8014_AntonioDePasquale.Module is added to the set of Modules moduleSet.
+	 * each variable used as parameters in the Module constructor.
+	 * Module is added to the set of Modules moduleSet.
 	 * @return The set of Modules moduleSet.
 	 */
-	public static Set<Module> readInModules(String path) {
+	public Set<Module> readInModules(String path) {
 		//add your code here. Do NOT change the method signature
 
 		try {
@@ -72,7 +92,7 @@ public class StaffManager {
 	 * uk.ac.ncl.CSC8014_AntonioDePasquale.Name is added to the set of Names studentNameSet.
 	 * @return The set of student Names studentNameSet.
 	 */
-	public static Set<Name> readInStudents(String path) {
+	public Set<Name> readInStudents(String path) {
 		//add your code here. Do NOT change the method signature
 
 		try {
