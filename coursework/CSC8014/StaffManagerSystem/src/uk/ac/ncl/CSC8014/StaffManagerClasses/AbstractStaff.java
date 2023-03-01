@@ -1,6 +1,4 @@
-package uk.ac.ncl.CSC8014_AntonioDePasquale;
-
-import uk.ac.ncl.CSC8014_AntonioDePasquale.Staff;
+package uk.ac.ncl.CSC8014.StaffManagerClasses;
 
 public abstract class AbstractStaff implements Staff {
 
@@ -10,7 +8,7 @@ public abstract class AbstractStaff implements Staff {
     private final String staffType;
 
     /**
-     * The uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff constructor.
+     * The AbstractStaff constructor.
      * Checks the staff contract type for either fixed-term or permanent and sets it to the employmentStatus variable.
      * Is set to private and only called when getInstance() is called. Which calls either the lecturer or researcher
      * constructor. The abstractStaff constructor is never called on its own.
@@ -57,27 +55,27 @@ public abstract class AbstractStaff implements Staff {
     }
 
     /**
-     * Implementation of getStaffID outlined in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff interface.
+     * Implementation of getStaffID outlined in the Staff interface.
      * Returns the staff ID.
      * All staff must have an ID
-     * @return the uk.ac.ncl.CSC8014_AntonioDePasquale.StaffID object
+     * @return the StaffID object
      */
     public StaffID getStaffID() {
         return this.id;
     };
 
     /**
-     * Implementation of getSmartCard outlined in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff interface.
+     * Implementation of getSmartCard outlined in the Staff interface.
      * Returns the smart card.
      * All staff must have a smart card
-     * @return the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard object
+     * @return the SmartCard object
      */
     public SmartCard getSmartCard() {
         return this.card;
     }
 
     /**
-     * Implementation of getStaffEmploymentStatus outlined in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff interface.
+     * Implementation of getStaffEmploymentStatus outlined in the Staff interface.
      * Returns the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff employment status.
      * a uk.ac.ncl.CSC8014_AntonioDePasquale.Staff can be either on Permanent or fixed contract
      * @return a string (Permanent or fixed)

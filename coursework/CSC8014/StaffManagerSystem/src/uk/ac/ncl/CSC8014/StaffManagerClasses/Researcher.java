@@ -1,7 +1,4 @@
-package uk.ac.ncl.CSC8014_AntonioDePasquale;
-
-import uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff;
-import uk.ac.ncl.CSC8014_AntonioDePasquale.Name;
+package uk.ac.ncl.CSC8014.StaffManagerClasses;
 
 import java.util.HashSet;
 import java.util.Iterator;

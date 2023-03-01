@@ -1,7 +1,5 @@
-package uk.ac.ncl.CSC8014_AntonioDePasquale;
+package uk.ac.ncl.CSC8014.StaffManagerClasses;
 
-import uk.ac.ncl.CSC8014_AntonioDePasquale.*;
-import uk.ac.ncl.CSC8014_AntonioDePasquale.Module;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +21,7 @@ public class StaffManager {
 	 */
 	private final Map<StaffID, Staff> staffMap = new HashMap<>();
 	private static final Set<Name> studentNameSet = new HashSet<Name>();
-	private static final Set<uk.ac.ncl.CSC8014_AntonioDePasquale.Module> moduleSet = new HashSet<uk.ac.ncl.CSC8014_AntonioDePasquale.Module>();
+	private static final Set<Module> moduleSet = new HashSet<Module>();
 
 	/**
 	 * Main method left empty as per assignment program is not meant to be run.
@@ -57,7 +55,7 @@ public class StaffManager {
 				Integer semester = Integer.parseInt(moduleAttributes[2].trim());
 				Integer credits = Integer.parseInt(moduleAttributes[3].trim());
 
-				uk.ac.ncl.CSC8014_AntonioDePasquale.Module tempModule = new uk.ac.ncl.CSC8014_AntonioDePasquale.Module(moduleCode, moduleName, semester, credits);
+				Module tempModule = new Module(moduleCode, moduleName, semester, credits);
 				moduleSet.add(tempModule);
 			}
 		} catch (FileNotFoundException e) {
@@ -133,7 +131,7 @@ public class StaffManager {
 	 * returns false if staffID is not found or staff is not of correct type.
 	 * @return true or false
 	 */
-	public boolean addData(StaffID id, Set<uk.ac.ncl.CSC8014_AntonioDePasquale.Module> modules, Set<Name> students) {
+	public boolean addData(StaffID id, Set<Module> modules, Set<Name> students) {
 		//add your code here. Do NOT change the method signature
 		for (Map.Entry<StaffID, Staff> entry : staffMap.entrySet()) {
 			if (entry.getKey().toString().equalsIgnoreCase(id.toString())) {

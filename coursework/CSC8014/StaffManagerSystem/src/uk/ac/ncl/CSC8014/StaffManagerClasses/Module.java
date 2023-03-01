@@ -1,4 +1,4 @@
-package uk.ac.ncl.CSC8014_AntonioDePasquale;
+package uk.ac.ncl.CSC8014.StaffManagerClasses;
 
 public final class Module {
 
