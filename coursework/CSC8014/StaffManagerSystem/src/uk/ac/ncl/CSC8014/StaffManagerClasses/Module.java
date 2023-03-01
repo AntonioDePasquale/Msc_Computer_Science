@@ -8,7 +8,7 @@ public final class Module {
     private final Integer credits;
 
     /**
-     * Constructor for the uk.ac.ncl.CSC8014_AntonioDePasquale.Module class
+     * Constructor for the Module class
      * takes in the following parameters and sets them to variables.
      */
 
@@ -20,7 +20,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the credits of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
+     * Getter for the credits of the Module
      * @return the credits variable
      */
     public Integer getCredits() {
@@ -28,7 +28,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the moduleCode of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
+     * Getter for the moduleCode of the Module
      * @return the moduleCode variable
      */
     public String getModuleCode() {
@@ -36,7 +36,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the moduleName of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
+     * Getter for the moduleName of the Module
      * @return the moduleName variable
      */
     public String getModuleName() {
@@ -44,7 +44,7 @@ public final class Module {
     }
 
     /**
-     * Getter for the semester of the uk.ac.ncl.CSC8014_AntonioDePasquale.Module
+     * Getter for the semester of the Module
      * @return the semester variable
      */
     public Integer getSemester() {
@@ -52,14 +52,15 @@ public final class Module {
     }
 
     /**
-     * ValueOf function that takes a module and concatenates its variables into a string.
+     * toString function that takes a module and concatenates its variables into a string.
      * @return the module variables as a full string.
      */
-    public static String valueOf(Module module) {
-         String moduleCode = module.getModuleCode();
-         String moduleName = module.getModuleName();
-         String semester = String.valueOf(module.getSemester());
-         String credits = String.valueOf(module.getCredits());
+    @Override
+    public String toString() {
+         String moduleCode = this.getModuleCode();
+         String moduleName = this.getModuleName();
+         String semester = String.valueOf(this.getSemester());
+         String credits = String.valueOf(this.getCredits());
 
         return moduleCode + ", " + moduleName + ", " + semester + ", " + credits;
     }
