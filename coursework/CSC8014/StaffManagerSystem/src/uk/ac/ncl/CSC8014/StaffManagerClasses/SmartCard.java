@@ -14,7 +14,7 @@ public final class SmartCard implements Comparable<SmartCard> {
     private final String employmentStatus;
 
     /**
-     * Constructor for uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard which takes a uk.ac.ncl.CSC8014_AntonioDePasquale.Name obj, smartCardNumber, date issued and dat of birth as parameters.
+     * Constructor for SmartCard which takes a Name obj, smartCardNumber, date issued and dat of birth as parameters.
      * sets variables to appropriate parameters.
      * constructor is private, only called in getInstance method.
      */
@@ -27,10 +27,10 @@ public final class SmartCard implements Comparable<SmartCard> {
     }
 
     /**
-     * getInstance factory method to get instance of uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard using constructor.
-     * creates a new uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber object, gets the issued date from current date.
-     * uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber is only created when a new uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard is so uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard instances are always unique
-     * @return new instance of uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard.
+     * getInstance factory method to get instance of SmartCard using constructor.
+     * creates a new SmartCardNumber object, gets the issued date from current date.
+     * SmartCardNumber is only created when a new is so SmartCard instances are always unique
+     * @return new instance of SmartCard.
      */
     public static SmartCard getInstance(Name staffName, Date dateOfBirth, String employmentStatus) {
 
@@ -43,31 +43,31 @@ public final class SmartCard implements Comparable<SmartCard> {
     }
 
     /**
-     * Getter for the staffName of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard instance
-     * @return the fullName String from the uk.ac.ncl.CSC8014_AntonioDePasquale.Name object.
+     * Getter for the staffName of the SmartCard instance
+     * @return the fullName String from the Name object.
      */
     public String getStaffName() {
         return staffName.getFullName();
     }
 
     /**
-     * Getter for the date of birth of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard instance
-     * @return the Date of birth Date variable from uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard.
+     * Getter for the date of birth of the SmartCard instance
+     * @return the Date of birth Date variable from SmartCard.
      */
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
     /**
-     * Getter for the Smart card number of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard instance
-     * @return the full card number String from uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber object using the getFullCardNumber() method.
+     * Getter for the Smart card number of the SmartCard instance
+     * @return the full card number String from SmartCardNumber object using the getFullCardNumber() method.
      */
     public String getSmartCardNumber() {
         return smartCardNumber.getFullCardNumber();
     }
 
     /**
-     * Getter for the date issued of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard instance
+     * Getter for the date issued of the SmartCard instance
      * @return the dateIssued Date varible.
      */
     public Date getDateIssued() {
