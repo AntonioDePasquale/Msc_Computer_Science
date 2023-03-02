@@ -88,13 +88,12 @@ public class StaffManager {
 	 * Method to read in the csv file of names from the path given as a parameter.
 	 * @param path file path to read names as csv from.
 	 * reads each line of the csv one by one separating it into 2 variables by splitting at the space.
-	 * first and last name variable used as parameters in the uk.ac.ncl.CSC8014_AntonioDePasquale.Name constructor.
-	 * uk.ac.ncl.CSC8014_AntonioDePasquale.Name is added to the set of Names studentNameSet.
+	 * first and last name variable used as parameters in the Name constructor.
+	 * Name is added to the set of Names studentNameSet.
 	 * @return The set of student Names studentNameSet.
 	 */
 	public Set<Name> readInStudents(String path) {
 		//add your code here. Do NOT change the method signature
-
 		try {
 			Scanner scan = new Scanner(new File(path));
 			while (scan.hasNextLine()) {
@@ -117,7 +116,7 @@ public class StaffManager {
 	}
 
 	/**
-	 * Method to get the number of staff in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff map staffMap of the parameter type.
+	 * Method to get the number of staff in the Staff map staffMap of the parameter type.
 	 * stafftype has to be either a lecturer or a researcher or exception is thrown.
 	 * int count is initialised to 0 and increases by 1 each time a staffmember is iterated over in the staffMap.
 	 * @return the count is returned.
@@ -144,10 +143,10 @@ public class StaffManager {
 	}
 
 	/**
-	 * Method to get the number of staff in the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff map staffMap of the parameter type.
-	 * Iterates over staffMap map, checks each key for the parameter uk.ac.ncl.CSC8014_AntonioDePasquale.StaffID.
+	 * Method to get the number of staff in the Staff map staffMap of the parameter type.
+	 * Iterates over staffMap map, checks each key for the parameter StaffID.
 	 * If staffID is found, checks the staff type of that staff member object.
-	 * returns true if uk.ac.ncl.CSC8014_AntonioDePasquale.Staff is of correct type and adds set of modules to lecturers and set of student Names to researchers.
+	 * returns true if is of correct type and adds set of modules to lecturers and set of student Names to researchers.
 	 * returns false if staffID is not found or staff is not of correct type.
 	 * @return true or false
 	 */
@@ -172,13 +171,13 @@ public class StaffManager {
 
 	/**
 	 * Method to employ staff which creates a chain of new Obj instances using the given parameters.
-	 * uk.ac.ncl.CSC8014_AntonioDePasquale.Name object is created using the uk.ac.ncl.CSC8014_AntonioDePasquale.Name constructor from first name and lastName.
-	 * uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard is created using the uk.ac.ncl.CSC8014_AntonioDePasquale.Name object, dob and employments status as parameters using getInstance.
-	 * The uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber object is created within the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard getInstance method so that it is tied to the creation of SmartCards.
-	 * Using these Object instances the Abstract GetInstance method can be called which creates either a uk.ac.ncl.CSC8014_AntonioDePasquale.Lecturer or uk.ac.ncl.CSC8014_AntonioDePasquale.Researcher instance.
-	 * The age range is checked and the name and dob is checked against existing uk.ac.ncl.CSC8014_AntonioDePasquale.Staff instances using the compareTo() outlined in uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCard.
+	 * Name object is created using the Name constructor from first name and lastName.
+	 * SmartCard is created using the Name object, dob and employments status as parameters using getInstance.
+	 * The SmartCardNumber object is created within the SmartCard getInstance method so that it is tied to the creation of SmartCards.
+	 * Using these Object instances the Abstract GetInstance method can be called which creates either a Lecturer or Researcher instance.
+	 * The age range is checked and the name and dob is checked against existing Staff instances using the compareTo() outlined in SmartCard.
 	 * this ensures that the same person cannot be employed twice.
-	 * @return the newly created uk.ac.ncl.CSC8014_AntonioDePasquale.Staff member is returned.
+	 * @return the newly created Staff member is returned.
 	 */
 	public Staff employStaff (String firstName, String lastName, Date dob, String staffType, String employmentStatus) {
 		//add your code here. Do NOT change the method signature
@@ -211,9 +210,9 @@ public class StaffManager {
 	}
 
 	/**
-	 * Method to terminate the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff member with the parameter uk.ac.ncl.CSC8014_AntonioDePasquale.StaffID.
+	 * Method to terminate the Staff member with the parameter StaffID.
 	 * Iterates over all staff members checking if their StaffId matches the parameter.
-	 * If they match the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff member is removed from the staff map.
+	 * If they match the Staff member is removed from the staff map.
 	 */
 	public void terminateStaff (StaffID id){
 		//add your code here. Do NOT change the method signature
@@ -236,7 +235,7 @@ public class StaffManager {
 	}
 
 	/**
-	 * Method to calculate the age of the uk.ac.ncl.CSC8014_AntonioDePasquale.Staff member.
+	 * Method to calculate the age of the Staff member.
 	 * Uses the difference between current date and parameter date of birth to find the age.
 	 * @returns age in years as an integer.
 	 */

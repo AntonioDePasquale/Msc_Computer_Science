@@ -44,9 +44,9 @@ public abstract class AbstractStaff implements Staff {
         if (staffType == null) {
             throw new IllegalArgumentException("uk.ac.ncl.CSC8014_AntonioDePasquale.Staff type is null");
         }
-        if (employmentStatus.equalsIgnoreCase("lecturer")) {
+        if (staffType.equalsIgnoreCase("lecturer")) {
             result = new Lecturer(newCard,employmentStatus, staffType, newStaffId);
-        } else if (employmentStatus.equalsIgnoreCase("researcher")) {
+        } else if (staffType.equalsIgnoreCase("researcher")) {
            result = new Researcher(newCard, employmentStatus, staffType, newStaffId);
         } else {
             throw new IllegalArgumentException("\"Enter either \"lecturer\" or \"researcher\"");

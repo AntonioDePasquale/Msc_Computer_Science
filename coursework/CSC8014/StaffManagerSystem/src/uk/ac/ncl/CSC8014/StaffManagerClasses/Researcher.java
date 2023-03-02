@@ -12,7 +12,7 @@ public final class Researcher extends AbstractStaff {
      * The constructor for the researcher class.
      * calls the constructor from uk.ac.ncl.CSC8014_AntonioDePasquale.AbstractStaff when stafftype is "researcher"
      */
-    public Researcher(SmartCard card, String employmentStatus, String staffType, StaffID id) {
+    Researcher(SmartCard card, String employmentStatus, String staffType, StaffID id) {
         super(card, employmentStatus, staffType, id);
     }
 
@@ -20,7 +20,7 @@ public final class Researcher extends AbstractStaff {
      * Returns the set of student names supervised by the researcher.
      * @return Set of student name objects.
      */
-    public Set<Name> getStudentNameSet() {
+    public static Set<Name> getStudentNameSet() {
         return studentNameSet;
     }
 
@@ -29,7 +29,7 @@ public final class Researcher extends AbstractStaff {
      * 10 students are required in total.
      * @return true or false.
      */
-    static Boolean supervisingTenStudentsCheck() {
+    public static Boolean supervisingTenStudentsCheck() {
         if (studentNameSet.size() >= 10) {
             return true;
         } else {

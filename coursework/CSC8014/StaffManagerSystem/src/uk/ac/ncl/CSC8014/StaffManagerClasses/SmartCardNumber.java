@@ -8,10 +8,11 @@ public final class SmartCardNumber {
 
     private final String nameInitials, fullCardNumber;
     private static Integer serialNumber = 10;
+    private Integer thisInstanceSerialNumber;
     private static final Map<String, SmartCardNumber> SMARTCARDNUMS = new HashMap<String, SmartCardNumber>();
 
     /**
-     * Constructor for uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber which takes a uk.ac.ncl.CSC8014_AntonioDePasquale.Name obj and fullCardNumber as parameters.
+     * Constructor for SmartCardNumber which takes a Name obj and fullCardNumber as parameters.
      * sets variables to appropriate parameters.
      * The serialNumber initialised as 10 is incremented by 1 with the serialNumberIncrement method.
      * As serial number is static each time an instance is created it will be unique to that instance.
@@ -21,19 +22,20 @@ public final class SmartCardNumber {
 
         this.nameInitials = createInitialPrefix(nameObj);
         this.fullCardNumber = fullCardNumber;
-        serialNumber = serialNumberIncrement();
+        serialNumber = serialNumber + 1;
+        thisInstanceSerialNumber = serialNumber;
     }
 
     /**
-     * GetInstance factory method for creating instance of uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber to ensure uniqueness.
+     * GetInstance factory method for creating instance of SmartCardNumber to ensure uniqueness.
      * The full card number is created in the method using the name initials, serial number and issue year.
-     * @return the created uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber instance if it doesn't currently exist in the static Map SMARTCARDNUMS.
+     * @return the created SmartCardNumber instance if it doesn't currently exist in the static Map SMARTCARDNUMS.
      */
     public static SmartCardNumber getInstance(Name nameObj) {
         Calendar newCal = Calendar.getInstance();
         Integer issueYear = newCal.get(Calendar.YEAR);
 
-        String fullCardNumber = createInitialPrefix(nameObj) + "-" + serialNumberIncrement() + "-" + issueYear;
+        String fullCardNumber = createInitialPrefix(nameObj) + "-" + (serialNumber + 1) + "-" + issueYear;
         SmartCardNumber num = SMARTCARDNUMS.get(fullCardNumber);
         if (num == null) {
             num = new SmartCardNumber(nameObj, fullCardNumber);
@@ -46,11 +48,21 @@ public final class SmartCardNumber {
      * creates the initial prefix to be used in creation of the full card number.
      * @return the name initials as a String in upper case.
      */
-    private static String createInitialPrefix(Name nameObj) {
+    public static String createInitialPrefix(Name nameObj) {
         String firstName = nameObj.getFirstName();
         String lastName = nameObj.getLastName();
+        String firstLetter = firstName.substring(0, 1).toUpperCase();
+        String lastLetter = lastName.substring(0, 1).toUpperCase();
 
-        return String.valueOf(firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
+        return firstLetter +lastLetter;
+    }
+
+    /**
+     * Getter for the serialNumber of the SmartCardNumber instance
+     * @return the serialNumber integer variable
+     */
+    public Integer getSerialNumber() {
+        return thisInstanceSerialNumber;
     }
 
     /**
@@ -58,20 +70,13 @@ public final class SmartCardNumber {
      * returns the serialnumber + 1.
      * this function is called when creating a new smartCardNumber.
      */
-    public static Integer serialNumberIncrement() {
-        return serialNumber++;
-    }
 
-    /**
-     * Getter for the fullCardNumber of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber instance
-     * @return the fullCardNumber variable
-     */
     public String getFullCardNumber() {
         return fullCardNumber;
     }
 
     /**
-     * Getter for the name initials of the uk.ac.ncl.CSC8014_AntonioDePasquale.SmartCardNumber instance
+     * Getter for the name initials of the SmartCardNumber instance
      * @return the nameInitials variable
      */
     public String getNameInitials() {
