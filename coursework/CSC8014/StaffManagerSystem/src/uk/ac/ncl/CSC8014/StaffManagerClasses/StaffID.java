@@ -10,7 +10,7 @@ public final class StaffID {
     private final String fullID;
 
     /**
-     * uk.ac.ncl.CSC8014_AntonioDePasquale.StaffID constructor.
+     * StaffID constructor.
      * set to private and only accessible through the getInstance method.
      */
     private StaffID(String fullID) {
@@ -18,12 +18,12 @@ public final class StaffID {
     }
 
     /**
-     * uk.ac.ncl.CSC8014_AntonioDePasquale.StaffID getInstance factory method.
+     * StaffID getInstance factory method.
      * set to private and only accessible through the getInstance method.
      * a random lowercase char of any letter of the alphabet is randomly generated.
      * a random number between 111 and 999 is generated.
      * these are concatenated together to creates the fullID string.
-     * this is checked for uniqueness against a Map of generated uk.ac.ncl.CSC8014_AntonioDePasquale.StaffID's.
+     * this is checked for uniqueness against a Map of generated StaffID's.
      * If it is unique it is created and added to the map STAFFIDS.
      * @return id;
      */

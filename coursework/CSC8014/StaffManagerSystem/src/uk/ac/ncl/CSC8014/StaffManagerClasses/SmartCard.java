@@ -24,6 +24,7 @@ public final class SmartCard implements Comparable<SmartCard> {
         this.dateIssued = dateIssued;
         this.dateOfBirth = dateOfBirth;
         this.employmentStatus = employeeStatus;
+        setExpiryDate();
     }
 
     /**
