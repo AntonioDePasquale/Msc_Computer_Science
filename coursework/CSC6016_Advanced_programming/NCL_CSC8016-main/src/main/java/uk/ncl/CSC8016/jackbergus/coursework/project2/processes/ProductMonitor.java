@@ -3,9 +3,16 @@ package uk.ncl.CSC8016.jackbergus.coursework.project2.processes;
 import uk.ncl.CSC8016.jackbergus.coursework.project2.utils.Item;
 
 import java.util.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class ProductMonitor {
+
+    private Lock lock = new ReentrantLock();
+    private Condition condition = lock.newCondition();
+
     Queue<Item> available;
     Queue<Item> withdrawn;
 
@@ -21,6 +28,7 @@ public class ProductMonitor {
         }
     }
 
+    //removes an item from available and adds it to withdrawn while retuning that item
     public Optional<Item> getAvailableItem() {
         Optional<Item> o = Optional.empty();
         if (!available.isEmpty()) {
@@ -33,6 +41,7 @@ public class ProductMonitor {
         return o;
     }
 
+    // shelves an item removing it from withdrawn while adding it to available
     public boolean doShelf(Item u) {
         boolean result = false;
         if (withdrawn.remove(u)) {
@@ -42,6 +51,7 @@ public class ProductMonitor {
         return result;
     }
 
+    //returns a set of the available item names
     public Set<String> getAvailableItems() {
         Set<String> s;
         s = available.stream().map(x -> x.productName).collect(Collectors.toSet());

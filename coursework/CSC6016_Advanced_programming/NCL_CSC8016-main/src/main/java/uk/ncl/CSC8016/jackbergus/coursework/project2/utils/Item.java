@@ -20,6 +20,10 @@ public class Item implements Comparable<Item> {
         this.id = id;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
     @Override
     public String toString() {
         return "The "+id+"-th " + productName+" costs "+this.cost+"£";

@@ -31,6 +31,10 @@ public class Transaction {
         return s;
     }
 
+    public LinkedList<Item> getBasket() {
+        return basket;
+    }
+
     public List<String> getAvailableItems()  {
         if (s == null || (uuid == null)) return Collections.emptyList();
         return s.getAvailableItems(this);
@@ -56,7 +60,7 @@ public class Transaction {
         return elements;
     }
 
-public boolean shelfProduct(Item name) {
+    public boolean shelfProduct(Item name) {
         if (s == null || (uuid == null)) return false;
         boolean result = s.shelfProduct(this, name);
         if (result) basket.remove(name);

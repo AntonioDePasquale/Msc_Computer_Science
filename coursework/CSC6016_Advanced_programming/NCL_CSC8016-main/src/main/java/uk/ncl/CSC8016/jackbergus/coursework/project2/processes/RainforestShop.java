@@ -33,7 +33,7 @@ public class RainforestShop {
      * @return  Your student id!
      */
     public String studentId() {
-        return "012345678";
+        return "2062292";
     }
 
 
@@ -95,9 +95,34 @@ public class RainforestShop {
      * @return false if the transaction is null or whether that was not created by the system
      */
     boolean logout(Transaction transaction) {
-        boolean result = false;
-        // TODO: Implement the remaining part!
-        return result;
+        // TODO: Implement the remaining part! (DONE)
+        UUID transactionUUID = transaction.getUuid();
+        String transactionUsername = transaction.getUsername();
+
+        if (transactionUUID == null || (transactionUsername == null)) {
+            return false;
+        } else return checkUuidToUserMap(UUID_to_user, transactionUUID, transactionUsername);
+    }
+
+    /**
+     * Function to check key value pair in a map of UUIDs (the key) and usernames (values) and removes if present.
+     * A unique UUID(key) represents a user session and is tied to the user's username(value)
+     *
+     * @param UUIDToUser map of user UUUIDs and usernames that are logged in.
+     * @param key        UUID of logged-in user session.
+     * @param value      Username of logged-in user session.
+     * @return true if user UUID and username is present in the map, false otherwise.
+     */
+    Boolean checkUuidToUserMap(Map<UUID, String> UUIDToUser, UUID key, String value) {
+        if (UUIDToUser != null) {
+            if (UUIDToUser.containsKey(key)) {
+                if (UUIDToUser.get(key).equals(value)) {
+                    UUIDToUser.remove(key);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -107,7 +132,19 @@ public class RainforestShop {
      */
     List<String> getAvailableItems(Transaction transaction) {
         List<String> ls = Collections.emptyList();
-        // TODO: Implement the remaining part!
+        LinkedList<Item> basketCopy = transaction.getBasket();
+        // TODO: Implement the remaining part! (DONE -maybe...)
+
+        for (Map.Entry<String, ProductMonitor> entry : available_withdrawn_products.entrySet()) {
+            String productName = entry.getKey();
+            ProductMonitor p = entry.getValue();
+
+            for (Item item : basketCopy) {
+                if ((!item.getProductName().equals(productName)) && (!p.getAvailableItems().isEmpty())) {
+                    ls.add(productName);
+                }
+            }
+        }
         return ls;
     }
 
