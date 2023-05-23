@@ -31,10 +31,6 @@ public class Transaction {
         return s;
     }
 
-    public LinkedList<Item> getBasket() {
-        return basket;
-    }
-
     public List<String> getAvailableItems()  {
         if (s == null || (uuid == null)) return Collections.emptyList();
         return s.getAvailableItems(this);

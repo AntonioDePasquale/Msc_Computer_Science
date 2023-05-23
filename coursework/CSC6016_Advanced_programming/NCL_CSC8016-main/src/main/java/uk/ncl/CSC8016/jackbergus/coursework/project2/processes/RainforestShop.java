@@ -9,6 +9,9 @@ import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class RainforestShop {
@@ -22,6 +25,10 @@ public class RainforestShop {
     private volatile HashMap<String, ProductMonitor> available_withdrawn_products;
     private HashMap<String, Double> productWithCost = new HashMap<>();
     private volatile Queue<String> currentEmptyItem;
+
+    private Lock lock1 = new ReentrantLock();
+    private Lock lock2 = new ReentrantLock();
+    private Condition supplierCondition = lock1.newCondition();
 
 
     public boolean isGlobalLock() {
@@ -95,13 +102,24 @@ public class RainforestShop {
      * @return false if the transaction is null or whether that was not created by the system
      */
     boolean logout(Transaction transaction) {
+        Boolean result = false;
         // TODO: Implement the remaining part! (DONE)
         UUID transactionUUID = transaction.getUuid();
         String transactionUsername = transaction.getUsername();
+        List<Item> basketCopy = transaction.getUnmutableBasket();
 
         if (transactionUUID == null || (transactionUsername == null)) {
-            return false;
-        } else return checkUuidToUserMap(UUID_to_user, transactionUUID, transactionUsername);
+            return result;
+        } else if (checkUuidToUserMap(UUID_to_user, transactionUUID, transactionUsername)) {
+            result = true;
+            for (Item item : basketCopy) {
+                if (item != null) {
+                    transaction.shelfProduct(item);
+                }
+            }
+        }
+        transaction.invalidateTransaction();
+        return result;
     }
 
     /**
@@ -132,7 +150,7 @@ public class RainforestShop {
      */
     List<String> getAvailableItems(Transaction transaction) {
         List<String> ls = Collections.emptyList();
-        LinkedList<Item> basketCopy = transaction.getBasket();
+        List<Item> basketCopy = transaction.getUnmutableBasket();
         // TODO: Implement the remaining part! (DONE -maybe...)
 
         for (Map.Entry<String, ProductMonitor> entry : available_withdrawn_products.entrySet()) {
@@ -157,9 +175,22 @@ public class RainforestShop {
      */
     Optional<Item> basketProductByName(Transaction transaction, String name) {
         AtomicReference<Optional<Item>> result = new AtomicReference<>(Optional.empty());
-        if (transaction.getSelf() == null || (transaction.getUuid() == null)) return result.get();
-        // TODO: Implement the remaining part!
-        return result.get();
+        if (transaction.getSelf() == null || (transaction.getUuid() == null)) {
+            return result.get();
+        }
+        // TODO: Implement the remaining part! (DONE)
+        else {
+            for (Map.Entry<String, ProductMonitor> entry : available_withdrawn_products.entrySet()) {
+                String productName = entry.getKey();
+                ProductMonitor p = entry.getValue();
+
+                if (productName.equalsIgnoreCase(name)) {
+                    Optional<Item> availableItem = p.getAvailableItem();
+                    result.set(availableItem);
+                }
+            }
+            return result.get();
+        }
     }
 
     /**
@@ -172,7 +203,21 @@ public class RainforestShop {
     boolean shelfProduct(Transaction transaction, Item object) {
         boolean result = false;
         if (transaction.getSelf() == null || (transaction.getUuid() == null)) return false;
-        // TODO: Implement the remaining part!
+        // TODO: Implement the remaining part! (DONE)
+        //check the basket, if item is in basket re-shelf
+        List<Item> basketCopy = transaction.getUnmutableBasket();
+
+        if (basketCopy.contains(object)) {
+            for (Map.Entry<String, ProductMonitor> entry : available_withdrawn_products.entrySet()) {
+                String productName = entry.getKey();
+                ProductMonitor p = entry.getValue();
+
+                if (object.getProductName().equals(productName)) {
+                    p.doShelf(object);
+                    result = true;
+                }
+            }
+        }
         return result;
     }
 
@@ -181,7 +226,9 @@ public class RainforestShop {
      */
     public void stopSupplier() {
         // TODO: Provide a correct concurrent implementation!
+        lock1.lock();
         currentEmptyItem.add("@stop!");
+        lock1.unlock();
     }
 
     /**
@@ -190,8 +237,10 @@ public class RainforestShop {
      */
     public void supplierStopped(AtomicBoolean stopped) {
         // TODO: Provide a correct concurrent implementation!
+        lock2.lock();
         supplierStopped = true;
         stopped.set(true);
+        lock2.unlock();
     }
 
     /**
@@ -203,9 +252,65 @@ public class RainforestShop {
      */
     public String getNextMissingItem() {
         // TODO: Provide a correct concurrent implementation!
+        try {
+            acquireLocks(lock1, lock2);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         supplierStopped = false;
-        while (currentEmptyItem.isEmpty());
-        return currentEmptyItem.remove();
+        String itemCopy = currentEmptyItem.remove();
+
+        while (currentEmptyItem.isEmpty()) {
+            try {
+                supplierCondition.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        while (currentEmptyItem.size() > 0) {
+            supplierCondition.signal();
+        }
+
+        lock1.unlock();
+        lock2.unlock();
+        return itemCopy;
+    }
+
+    /**
+     * Method to try and acquire both locks, will only proceed if both locks are acquired.
+     * while loop ensures functions runs until both locks acquired.
+     * @param lock1 first lock to acquire
+     * @param lock2 second lock to acquire
+     * @throws InterruptedException
+     */
+     static void acquireLocks(Lock lock1, Lock lock2) throws InterruptedException {
+        while(true) {
+            //acquire locks
+
+            Boolean gotLock1 = false;
+            Boolean gotLock2 = false;
+
+            try {
+                //tries to get the locks
+                gotLock1 = lock1.tryLock();
+                gotLock2 = lock2.tryLock();
+            } finally {
+                if (gotLock1 && gotLock2) {
+                    return;
+                }
+                //if you only have lock1, unlock it
+                if(gotLock1) {
+                    lock1.unlock();
+                }
+                //if you only have lock2, unlock it
+                if (gotLock2) {
+                    lock2.unlock();
+                }
+            }
+            //locks not acquired
+            Thread.sleep(1);
+        }
     }
 
 
